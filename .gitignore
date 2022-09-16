@@ -1,3 +1,5 @@
+keys/
+gradle.properties
 
 # Created by https://www.toptal.com/developers/gitignore/api/android,androidstudio,jetbrains+all,firebase,gradle,git,maven,java,kotlin,c++
 # Edit at https://www.toptal.com/developers/gitignore?templates=android,androidstudio,jetbrains+all,firebase,gradle,git,maven,java,kotlin,c++
