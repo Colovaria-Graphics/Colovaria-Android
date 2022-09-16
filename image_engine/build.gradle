@@ -25,6 +25,13 @@ android {
         }
     }
 
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -54,4 +61,5 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
 }
 
+ext.publish_type="android"
 apply from: "../publish.gradle"

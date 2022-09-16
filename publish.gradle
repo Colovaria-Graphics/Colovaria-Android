@@ -1,3 +1,19 @@
+def publication_name = null
+def component_name = null
+
+switch (ext.publish_type) {
+    case "android":
+        publication_name = "release"
+        component_name = "release"
+        break
+    case "java":
+        publication_name = "mavenJava"
+        component_name = "java"
+        break
+    default:
+        throw new Exception("Unknown publish_type: " + ext.publish_type)
+}
+
 publishing {
     repositories {
         maven {
@@ -11,9 +27,11 @@ publishing {
     }
 
     publications {
-        mavenJava(MavenPublication) {
+        create(publication_name, MavenPublication) {
+            groupId = PUBLISH_GROUP
             artifactId = POM_NAME
-            from components.java
+            from components.findByName(component_name)
+
             versionMapping {
                 usage("java-api") {
                     fromResolutionOf("runtimeClasspath")
@@ -25,6 +43,7 @@ publishing {
             pom {
                 name = POM_NAME
                 description = POM_DESCRIPTION
+                version = POM_VERSION
                 url = POM_URL
                 licenses {
                     license {
@@ -50,11 +69,7 @@ publishing {
 }
 
 signing {
-    sign publishing.publications.mavenJava
-}
-
-javadoc {
-    if(JavaVersion.current().isJava9Compatible()) {
-        options.addBooleanOption("html5", true)
+    for (def publication : publishing.publications) {
+        sign publication
     }
 }

@@ -21,4 +21,5 @@ dependencies {
     testImplementation "junit:junit:$junit_version"
 }
 
+ext.publish_type="java"
 apply from: "../publish.gradle"
