@@ -2,20 +2,17 @@ plugins {
     id "com.android.library"
     id "kotlin-android"
     id "maven-publish"
+    id "signing"
 }
 
 android {
     namespace "com.colovaria.image_engine"
-    
+
     compileSdk compile_sdk
 
     defaultConfig {
         minSdk min_sdk
         targetSdk target_sdk
-
-        aarMetadata {
-            minCompileSdk min_sdk
-        }
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -28,10 +25,6 @@ android {
         }
     }
 
-    testFixtures {
-        enable = true
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -39,27 +32,6 @@ android {
 
     kotlinOptions {
         jvmTarget = "1.8"
-    }
-}
-
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                groupId = 'com.colovaria.image_engine'
-                artifactId = 'colovaria.image_engine'
-                version = '1.0'
-                
-                from components.release
-            }
-            debug(MavenPublication) {
-                groupId = 'com.colovaria.image_engine'
-                artifactId = 'colovaria.image_engine'
-                version = '1.0'
-                
-                from components.debug
-            }
-        }
     }
 }
 
@@ -81,3 +53,5 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$android_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
 }
+
+apply from: "../publish.gradle"

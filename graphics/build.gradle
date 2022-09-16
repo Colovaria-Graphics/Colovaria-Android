@@ -2,6 +2,7 @@ plugins {
     id "com.android.library"
     id "kotlin-android"
     id "maven-publish"
+    id "signing"
 }
 
 android {
@@ -13,10 +14,6 @@ android {
         minSdk min_sdk
         targetSdk target_sdk
 
-        aarMetadata {
-            minCompileSdk min_sdk
-        }
-        
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -26,10 +23,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
-    }
-
-    testFixtures {
-        enable = true
     }
 
     compileOptions {
@@ -42,33 +35,11 @@ android {
     }
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                groupId = "com.colovaria.graphics"
-                artifactId = "colovaria.graphics"
-                version = "1.0"
-                
-                from components.release
-            }
-            debug(MavenPublication) {
-                groupId = "com.colovaria.graphics"
-                artifactId = "colovaria.graphics"
-                version = "1.0"
-                
-                from components.debug
-            }
-        }
-    }
-}
-
 dependencies {
-    // projects
-    implementation project(path: ":geometry")
-
     // kotlin
     implementation "androidx.core:core-ktx:$ktx_core_version"
+
+    implementation "io.github.colovaria-graphics:geometry:1.0.0"
 
     // tests
     testImplementation "junit:junit:$junit_version"
@@ -77,3 +48,5 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$android_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
 }
+
+apply from: "../publish.gradle"
