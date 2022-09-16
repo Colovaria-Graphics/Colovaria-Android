@@ -5,8 +5,8 @@ plugins {
     id "signing"
 }
 
-group = GROUP
-version = VERSION
+group = PUBLISH_GROUP
+version = POM_VERSION
 
 java {
     withJavadocJar()
@@ -29,13 +29,13 @@ publishing {
                 password = REPO_PASSWORD
             }
 
-            url = version.endsWith("SNAPSHOT") ? SNAPSHOTS_REPO_URL : RELEASES_REPO_URL
+            url = version.endsWith("SNAPSHOT") ? REPO_SNAPSHOTS_URL : REPO_RELEASES_URL
         }
     }
 
     publications {
         mavenJava(MavenPublication) {
-            artifactId = ARTIFACT_ID
+            artifactId = POM_NAME
             from components.java
             versionMapping {
                 usage("java-api") {
