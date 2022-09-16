@@ -1,10 +1,12 @@
 def publication_name = null
 def component_name = null
+def is_android_build = false
 
 switch (ext.publish_type) {
     case "android":
         publication_name = "release"
         component_name = "release"
+        is_android_build = true
         break
     case "java":
         publication_name = "mavenJava"
@@ -12,6 +14,13 @@ switch (ext.publish_type) {
         break
     default:
         throw new Exception("Unknown publish_type: " + ext.publish_type)
+}
+
+task androidSourcesJar(type: Jar) {
+    archiveClassifier.set("sources")
+    if (project.plugins.findPlugin("com.android.library")) {
+        from android.sourceSets.main.java.srcDirs
+    }
 }
 
 publishing {
@@ -31,6 +40,11 @@ publishing {
             groupId = PUBLISH_GROUP
             artifactId = POM_NAME
             from components.findByName(component_name)
+
+            if (is_android_build) {
+                artifact androidSourcesJar
+                artifact "$buildDir/outputs/aar/" + artifactId + "-debug.aar"
+            }
 
             versionMapping {
                 usage("java-api") {
@@ -69,7 +83,5 @@ publishing {
 }
 
 signing {
-    for (def publication : publishing.publications) {
-        sign publication
-    }
+    sign publishing.publications
 }
