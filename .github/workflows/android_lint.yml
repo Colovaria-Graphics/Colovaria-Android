@@ -28,4 +28,4 @@ jobs:
       - uses: yutailang0119/action-android-lint@v3.1.0
         if: always()
         with:
-          report-path: */build/reports/*.xml
+          report-path: ./*/build/reports/*.xml
