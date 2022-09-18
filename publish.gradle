@@ -16,14 +16,6 @@ switch (ext.publish_type) {
         throw new Exception("Unknown publish_type: " + ext.publish_type)
 }
 
-def propertyOrNull(key) {
-    if (project.hasProperty(key)) {
-        return project.property(key)
-    } else {
-        return "NULL"
-    }
-}
-
 task androidSourcesJar(type: Jar) {
     archiveClassifier.set("sources")
     if (project.plugins.findPlugin("com.android.library")) {
@@ -35,18 +27,18 @@ publishing {
     repositories {
         maven {
             credentials {
-                username = propertyOrNull("REPO_USERNAME")
-                password = propertyOrNull("REPO_PASSWORD")
+                username = System.getProperty("repo_username")
+                password = System.getProperty("repo_password")
             }
 
-            url = propertyOrNull(version.endsWith("SNAPSHOT") ? "REPO_SNAPSHOTS_URL" : "REPO_RELEASES_URL")
+            url = version.endsWith("SNAPSHOT") ? REPO_SNAPSHOTS_URL : REPO_RELEASES_URL
         }
     }
 
     publications {
         create(publication_name, MavenPublication) {
-            groupId = propertyOrNull("PUBLISH_GROUP")
-            artifactId = propertyOrNull("POM_NAME")
+            groupId = PUBLISH_GROUP
+            artifactId = POM_NAME
             from components.findByName(component_name)
 
             if (is_android_build) {
@@ -63,27 +55,27 @@ publishing {
                 }
             }
             pom {
-                name = propertyOrNull("POM_NAME")
-                description = propertyOrNull("POM_DESCRIPTION")
-                version = propertyOrNull("POM_VERSION")
-                url = propertyOrNull("POM_URL")
+                name = POM_NAME
+                description = POM_DESCRIPTION
+                version = POM_VERSION
+                url = POM_URL
                 licenses {
                     license {
-                        name = propertyOrNull("POM_LICENCE_NAME")
-                        url = propertyOrNull("POM_LICENCE_URL")
+                        name = POM_LICENCE_NAME
+                        url = POM_LICENCE_URL
                     }
                 }
                 developers {
                     developer {
-                        id = propertyOrNull("POM_DEVELOPER_ID")
-                        name = propertyOrNull("POM_DEVELOPER_NAME")
-                        email = propertyOrNull("POM_DEVELOPER_EMAIL")
+                        id = POM_DEVELOPER_ID
+                        name = POM_DEVELOPER_NAME
+                        email = POM_DEVELOPER_EMAIL
                     }
                 }
                 scm {
-                    url = propertyOrNull("POM_SCM_URL")
-                    connection = propertyOrNull("POM_SCM_CONNECTION")
-                    developerConnection = propertyOrNull("POM_SCM_DEV_CONNECTION")
+                    url = POM_SCM_URL
+                    connection = POM_SCM_CONNECTION
+                    developerConnection = POM_SCM_DEV_CONNECTION
                 }
             }
         }
