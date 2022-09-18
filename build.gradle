@@ -1,3 +1,9 @@
+// TODO: use checkstyle
+// TODO: use this: https://gist.github.com/rezaiyan/d26156b77815756cd6880b7deb4ec27a
+// TODO: use linter.
+// TODO: create release.md
+// TODO: use CompletableFuture instead of rxjava.
+
 buildscript {
     // build options
     ext.compile_sdk = 33
@@ -22,10 +28,16 @@ buildscript {
         google()
         mavenCentral()
     }
+
     dependencies {
         classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
+}
+
+subprojects {
+    apply plugin: "maven-publish"
+    apply plugin: "signing"
 }
 
 task clean(type: Delete) {
