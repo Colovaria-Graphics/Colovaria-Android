@@ -1,4 +1,4 @@
-name: Android Lint
+name: Android Build
 
 on:
   push:
@@ -18,12 +18,14 @@ jobs:
           distribution: 'corretto'
           java-version: '11'
 
-
-#      - name: Setup Android SDK
-#        uses: android-actions/setup-android@v2
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
 
       - name: Run lint
         run: ./gradlew lint
+
+      - name: Run buid
+        run: ./gradlew build -x test
 
       - uses: yutailang0119/action-android-lint@v3.1.0
         if: always()
