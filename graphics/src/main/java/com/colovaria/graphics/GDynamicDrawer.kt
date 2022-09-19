@@ -73,7 +73,7 @@ class GDynamicDrawer private constructor(
         val vertexBuffer: GVertexBuffer,
     )
 
-    object Factory {
+    companion object {
         fun create(program: GProgram, vararg gpuStructs: GPUStruct) : GDynamicDrawer {
             return GDynamicDrawer(program, gpuStructs)
         }

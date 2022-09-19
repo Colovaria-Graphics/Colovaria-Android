@@ -94,20 +94,20 @@ class GTexture : GHandle, GUniform, GBindableHandle {
         setBorderColor(GColor.TRANSPARENT)
     }
 
+    private fun cropBitmap(bitmap: Bitmap, crop: RectF) : Bitmap {
+        val bitmapRect = bitmap.rect()
+        val cropRect = (crop * bitmapRect.size).clampTo(bitmapRect)
+
+        return if (cropRect != bitmapRect) Bitmap.createBitmap(
+            bitmap,
+            cropRect.left,
+            cropRect.bottom,
+            cropRect.width,
+            cropRect.height,
+        ) else bitmap
+    }
+
     companion object {
         fun boundedHandle() = GLES.glGetIntegerv(GLES32.GL_TEXTURE_BINDING_2D)
-
-        private fun cropBitmap(bitmap: Bitmap, crop: RectF) : Bitmap {
-            val bitmapRect = bitmap.rect()
-            val cropRect = (crop * bitmapRect.size).clampTo(bitmapRect)
-
-            return if (cropRect != bitmapRect) Bitmap.createBitmap(
-                bitmap,
-                cropRect.left,
-                cropRect.bottom,
-                cropRect.width,
-                cropRect.height,
-            ) else bitmap
-        }
     }
 }

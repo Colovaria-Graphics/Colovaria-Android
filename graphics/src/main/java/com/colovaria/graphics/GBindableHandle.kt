@@ -6,13 +6,13 @@ interface GBindableHandle {
      * return the handle of the last bounded object.
      */
     fun bind() : BindReference
+}
 
-    fun <T> withBind(func: () -> T) : T {
-        val bindReference = bind()
-        try {
-            return func()
-        } finally {
-            bindReference.unbind()
-        }
+inline fun <T> GBindableHandle.withBind(func: () -> T) : T {
+    val bindReference = bind()
+    try {
+        return func()
+    } finally {
+        bindReference.unbind()
     }
 }

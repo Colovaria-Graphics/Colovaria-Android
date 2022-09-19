@@ -2,12 +2,12 @@ package com.colovaria.image_engine.export
 
 import android.content.Context
 import android.graphics.Bitmap
-import com.colovaria.graphics.egl.GContext
-import com.colovaria.graphics.egl.GDisplay
-import com.colovaria.graphics.egl.GSurface
 import com.colovaria.geometry.Size
 import com.colovaria.graphics.BindReference
 import com.colovaria.graphics.GFrameBuffer
+import com.colovaria.graphics.egl.GContext
+import com.colovaria.graphics.egl.GDisplay
+import com.colovaria.graphics.egl.GSurface
 import com.colovaria.image_engine.FrameCompositor
 import com.colovaria.image_engine.api.Frame
 import com.colovaria.image_engine.api.resources.ImageLoader
@@ -44,7 +44,7 @@ class Exporter(
         }
     }
 
-    fun export(frame: Frame) = Single.create<Bitmap> {
+    fun export(frame: Frame) : Single<Bitmap> = Single.create {
         try {
             frameBuffer.withBind {
                 frameCompositor.render(frame, false)

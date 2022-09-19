@@ -13,4 +13,14 @@ object GUtils {
     fun setViewportSize(size: Size) {
         GLES.glViewport(0, 0, size.width, size.height)
     }
+
+    fun filenameToShaderType(filename: String) = when (filename.split(".").last()) {
+        "frag" -> GLES32.GL_FRAGMENT_SHADER
+        "vert" -> GLES32.GL_VERTEX_SHADER
+        "tesc" -> GLES32.GL_TESS_CONTROL_SHADER
+        "tese" -> GLES32.GL_TESS_EVALUATION_SHADER
+        "geom" -> GLES32.GL_GEOMETRY_SHADER
+        "comp" -> GLES32.GL_COMPUTE_SHADER
+        else -> error("unknown file type: $filename")
+    }
 }

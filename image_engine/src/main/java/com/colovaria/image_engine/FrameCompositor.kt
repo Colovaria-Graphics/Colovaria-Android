@@ -66,7 +66,7 @@ class FrameCompositor(
         frameBufferPool.dispose()
     }
 
-    private fun renderInternal(frame: Frame, renderToSurface: Boolean) {
+    protected fun renderInternal(frame: Frame, renderToSurface: Boolean) {
         val passFrameBuffers = frameBufferPool.acquireMany(PASS_FBO_NUM)
 
         if (frame.layers.isEmpty()) {
@@ -117,7 +117,7 @@ class FrameCompositor(
         override fun drawInternal(instruction: GroupInstruction, blending: BlenderInstruction): GTexture {
             val frameBuffer = frameBufferPool.acquire()
             frameBuffer.withBind {
-                renderInternal(instruction.frame, false)
+                this@FrameCompositor.renderInternal(instruction.frame, false)
             }
             val texture = frameBuffer.texture.clone()
             frameBufferPool.recycle(frameBuffer)

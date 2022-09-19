@@ -34,7 +34,7 @@ class GDisplay private constructor(
         }
     }
 
-    object Factory {
+    companion object {
         fun create(displaySpec: GDisplayConfigSpec = GDisplayConfigSpec()) : GDisplay {
             val eglDisplay = EGL14.eglGetDisplay(EGL14.EGL_DEFAULT_DISPLAY)
 

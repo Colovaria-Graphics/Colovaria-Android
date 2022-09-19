@@ -19,7 +19,7 @@ class DynamicMultiExporter(
     private val executors = Executors.newFixedThreadPool(count)
     private val scheduler = Schedulers.from(executors)
 
-    fun export(frame: Frame, size: Size) = Single.create<Bitmap> {
+    fun export(frame: Frame, size: Size) : Single<Bitmap> = Single.create {
         val exporter = Exporter(context, size, imageLoaderProvider, optimizeImageSize)
         try {
             it.onSuccess(exporter.export(frame).blockingGet())

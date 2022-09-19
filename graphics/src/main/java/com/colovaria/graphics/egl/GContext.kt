@@ -30,7 +30,7 @@ class GContext private constructor(
         if (!EGL14.eglSwapBuffers(display.eglDisplay, surface.eglSurface)) {
             when (EGL14.eglGetError()) {
                 EGL14.EGL_SUCCESS -> return
-                EGL14.EGL_CONTEXT_LOST -> TODO("handle context lose")
+                EGL14.EGL_CONTEXT_LOST -> error("handle context lose")
                 EGL14.EGL_BAD_SURFACE -> return // TODO: can we handle it better?
                 else -> error(this)
             }
@@ -42,7 +42,7 @@ class GContext private constructor(
         disposed = true
     }
 
-    object Factory {
+    companion object {
         fun create(display: GDisplay) : GContext {
             return GContext(EGL14.eglCreateContext(display.eglDisplay, display.eglConfig,
                 EGL14.EGL_NO_CONTEXT, intArrayOf(EGL14.EGL_CONTEXT_CLIENT_VERSION, 3, EGL14.EGL_NONE), 0), display)
