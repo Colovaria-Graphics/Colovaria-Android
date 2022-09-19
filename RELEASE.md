@@ -2,8 +2,8 @@ Release Process
 ===============
 
  1. Update the module `CHANGELOG.md` file with relevant info and date.
- 2. Update version number in `gradle.properties` file..
+ 2. Update version number in `gradle.properties` files...
  3. Commit: `git commit -am "Prepare version X.Y.Z-<Module>"`
- 4. Tag: `git tag -a X.Y.Z -m "Version X.Y.Z-<Module>"`
+ 4. Tag: `git tag -a X.Y.Z-<Module> -m "Version-X.Y.Z-<Module>"`
  5. Release: `./publish.sh`
  6. Push: `git push && git push --tags`
