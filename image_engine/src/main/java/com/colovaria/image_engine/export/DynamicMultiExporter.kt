@@ -5,11 +5,9 @@ import android.graphics.Bitmap
 import com.colovaria.geometry.Size
 import com.colovaria.image_engine.api.Frame
 import com.colovaria.image_engine.api.resources.ImageLoader
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executors
 
-// TODO: optimize it.
 class DynamicMultiExporter(
     private val context: Context,
     count: Int = 4,
@@ -17,23 +15,19 @@ class DynamicMultiExporter(
     private val optimizeImageSize: Boolean = false
 ) {
     private val executors = Executors.newFixedThreadPool(count)
-    private val scheduler = Schedulers.from(executors)
 
-    fun export(frame: Frame, size: Size) : Single<Bitmap> = Single.create {
+    fun export(frame: Frame, size: Size) : CompletableFuture<Bitmap> = CompletableFuture.supplyAsync({
         val exporter = Exporter(context, size, imageLoaderProvider, optimizeImageSize)
         try {
-            it.onSuccess(exporter.export(frame).blockingGet())
-        } catch (e: Exception) {
-            it.onError(e)
+            return@supplyAsync exporter.export(frame)
         } finally {
             exporter.dispose()
         }
-    }.subscribeOn(scheduler)
+    }, executors).thenCompose { it }
 
     fun dispose() {
-        scheduler.scheduleDirect {
+        executors.submit {
             executors.shutdown()
-            scheduler.shutdown()
         }
     }
 }

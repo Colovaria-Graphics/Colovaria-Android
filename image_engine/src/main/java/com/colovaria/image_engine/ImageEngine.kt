@@ -4,16 +4,17 @@ import android.content.Context
 import android.graphics.SurfaceTexture
 import android.os.Handler
 import android.os.HandlerThread
+import android.os.SystemClock
 import android.view.Surface
+import com.colovaria.geometry.Size
+import com.colovaria.graphics.BindReference
 import com.colovaria.graphics.egl.GContext
 import com.colovaria.graphics.egl.GDisplay
 import com.colovaria.graphics.egl.GSurface
-import com.colovaria.geometry.Size
-import com.colovaria.graphics.BindReference
 import com.colovaria.image_engine.api.Frame
 import com.colovaria.image_engine.api.resources.ImageLoader
-import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.schedulers.Schedulers
+import java.lang.Long.max
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 class ImageEngine(
@@ -23,9 +24,8 @@ class ImageEngine(
 ) {
     private val msBetweenFrames = TimeUnit.SECONDS.toMillis(1) / fps
 
-    private val handlerThread = HandlerThread("31bfa0078b171885fab0232cfabec7d7").apply { start() }
+    private val handlerThread = HandlerThread(UUID.randomUUID().toString()).apply { start() }
     private val handler = Handler(handlerThread.looper)
-    private val scheduler = Schedulers.from(handler::post)
 
     private lateinit var display: GDisplay
     private lateinit var gpuContext: GContext
@@ -40,32 +40,32 @@ class ImageEngine(
     private var forceRenderNextFrame = false
 
     @Volatile
-    private var renderTask: Disposable? = null
+    private var isRunning: Boolean = true
 
     init {
-        scheduler.scheduleDirect { initInternal() }
+        handler.post { initInternal() }
     }
 
     fun setTargetSurface(newSurface: Any?) {
-        scheduler.scheduleDirect { setTargetSurfaceInternal(newSurface) }
+        handler.post { setTargetSurfaceInternal(newSurface) }
     }
 
     fun setFrame(newFrame: Frame) {
-        scheduler.scheduleDirect { setFrameInternal(newFrame) }
+        handler.post { setFrameInternal(newFrame) }
     }
 
     fun isRunning() = isRunningInternal()
 
     fun start() {
-        scheduler.scheduleDirect { startInternal() }
+        handler.post { startInternal() }
     }
 
     fun stop() {
-        scheduler.scheduleDirect { stopInternal() }
+        handler.post { stopInternal() }
     }
 
     fun dispose() {
-        scheduler.scheduleDirect { disposeInternal() }
+        handler.post { disposeInternal() }
     }
 
     private fun initInternal() {
@@ -101,18 +101,26 @@ class ImageEngine(
         frame = newFrame
     }
 
-    private fun isRunningInternal() = renderTask != null
+    private fun isRunningInternal() = isRunning
 
     private fun startInternal() {
         if (isRunningInternal()) return
-        // TODO: find a better way to schedule rendering, this function ignores the times it takes to execute one render pass.
-        renderTask = scheduler.schedulePeriodicallyDirect({ renderInternal() }, 0, msBetweenFrames, TimeUnit.MILLISECONDS)
+        isRunning = true
+        scheduleNextRender()
+    }
+
+    private fun scheduleNextRender() {
+        if (!isRunning) return
+
+        val currentTime = SystemClock.uptimeMillis()
+        renderInternal()
+        val frameDuration = max(SystemClock.uptimeMillis() - currentTime, 0)
+        handler.postDelayed(this::scheduleNextRender, max(msBetweenFrames - frameDuration, 0))
     }
 
     private fun stopInternal() {
         if (!isRunningInternal()) return
-        renderTask?.dispose()
-        renderTask = null
+        isRunning = false
     }
 
     private fun disposeInternal() {
@@ -122,7 +130,6 @@ class ImageEngine(
         surface?.dispose()
         display.dispose()
         gpuContext.dispose()
-        scheduler.shutdown()
         handlerThread.quit()
     }
 

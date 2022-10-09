@@ -18,7 +18,7 @@ class ImageDrawer(
         val bitmap = imageLoader.load(
             instruction.path,
             targetSize = if (optimizeImageSize) approxTargetSize(instruction, blending) else null
-        ).blockingGet()
+        ).get()
 
         return GTexture(bitmap, instruction.crop)
     }
@@ -28,7 +28,7 @@ class ImageDrawer(
      * We approximate the size of the bitmap in the target in order to load optimized size.
      */
     private fun approxTargetSize(instruction: ImageInstruction, blending: BlenderInstruction) : Size {
-        val imageSize = imageLoader.size(instruction.path).blockingGet()
+        val imageSize = imageLoader.size(instruction.path).get()
         val cropScale = fullCropSize / instruction.crop.size
         return (blending.adjustMode.targetSize(imageSize, size) * cropScale * blending.scale).roundToSize()
     }

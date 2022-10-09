@@ -11,8 +11,7 @@ import com.colovaria.graphics.egl.GSurface
 import com.colovaria.image_engine.FrameCompositor
 import com.colovaria.image_engine.api.Frame
 import com.colovaria.image_engine.api.resources.ImageLoader
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.CompletableFuture
 import java.util.concurrent.Executors
 
 class Exporter(
@@ -22,7 +21,6 @@ class Exporter(
     private val optimizeImageSize: Boolean = false
 ) {
     private val executor = Executors.newSingleThreadExecutor()
-    private val scheduler = Schedulers.from(executor)
 
     private lateinit var frameCompositor : FrameCompositor
     private lateinit var display : GDisplay
@@ -32,7 +30,7 @@ class Exporter(
     private lateinit var contextBindReference: BindReference
 
     init {
-        scheduler.scheduleDirect {
+        executor.submit {
             display = GDisplay.Factory.create()
             gpuContext = GContext.Factory.create(display)
             surface = GSurface.Factory.create(display, size)
@@ -44,30 +42,25 @@ class Exporter(
         }
     }
 
-    fun export(frame: Frame) : Single<Bitmap> = Single.create {
-        try {
-            frameBuffer.withBind {
-                frameCompositor.render(frame, false)
-            }
-            gpuContext.swapBuffers(surface)
-
-            it.onSuccess(frameBuffer.save())
-        } catch (e: Exception) {
-            it.onError(e)
+    fun export(frame: Frame) : CompletableFuture<Bitmap> = CompletableFuture.supplyAsync({
+        frameBuffer.withBind {
+            frameCompositor.render(frame, false)
         }
-    }.subscribeOn(scheduler)
+        gpuContext.swapBuffers(surface)
+
+        return@supplyAsync frameBuffer.save()
+    }, executor)
 
     fun size() = size
 
     fun dispose() {
-        scheduler.scheduleDirect {
+        executor.submit {
             frameBuffer.dispose()
             frameCompositor.dispose()
             surface.dispose()
             display.dispose()
             contextBindReference.unbind()
             gpuContext.dispose()
-            scheduler.shutdown()
             executor.shutdown()
         }
     }

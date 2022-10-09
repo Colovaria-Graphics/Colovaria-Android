@@ -48,9 +48,6 @@ dependencies {
     implementation "io.github.colovaria-graphics:geometry:1.0.0"
     implementation "io.github.colovaria-graphics:graphics:1.0.2"
 
-    // reactive stream
-    implementation "io.reactivex.rxjava3:rxkotlin:$rxjava_version"
-
     // tests
     testImplementation "junit:junit:$junit_version"
 
