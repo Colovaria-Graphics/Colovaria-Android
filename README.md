@@ -7,16 +7,16 @@
 
 ## Libraries:
 ### Main library:
- - `Image Engine` - [![][image_engine_badge img]][image_engine_badge]
+ - [Image Engine](https://github.com/Colovaria-Graphics/Colovaria-Android/blob/main/image_engine/README.md) - [![][image_engine_badge img]][image_engine_badge]
  
  	Library that converts visual instructions to pixels on the screen.
 
 ### Utils libraries:
- - `Graphics` -  [![][graphics_badge img]][graphics_badge]
+ - [Graphics](https://github.com/Colovaria-Graphics/Colovaria-Android/blob/main/graphics/README.md) -  [![][graphics_badge img]][graphics_badge]
  	
 	Basic Kotlin wrap for OpenGLES state machine.
 	 
- - `Geometry` - [![][geometry_badge img]][geometry_badge]  
+ - [Geometry](https://github.com/Colovaria-Graphics/Colovaria-Android/blob/main/geometry/README.md) - [![][geometry_badge img]][geometry_badge]  
 	
 	Pure kotlin library for geometric shapes representation and calculations.
  
