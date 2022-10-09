@@ -115,7 +115,7 @@ class ImageEngine(
         val currentTime = SystemClock.uptimeMillis()
         renderInternal()
         val frameDuration = max(SystemClock.uptimeMillis() - currentTime, 0)
-        handler.postDelayed(this::scheduleNextRender, max(msBetweenFrames - frameDuration, 0))
+        handler.postDelayed({ scheduleNextRender() }, max(msBetweenFrames - frameDuration, 0))
     }
 
     private fun stopInternal() {
