@@ -1,19 +1,24 @@
 
-# ![ezgif-3-0d98430e38](https://user-images.githubusercontent.com/14913725/191113865-abe9b600-8d54-426a-b110-98313d5f8098.gif)  
+# ![ezgif-3-0d98430e38](https://user-images.githubusercontent.com/14913725/191113865-abe9b600-8d54-426a-b110-98313d5f8098.gif)
   
 🎨 2D layers-based image rendering engine for Android based on GLES, that works like Magic! 🪄  
 
 [![][build img]][build]  
 
-## Libraries:  
- - Image Engine - [![][image_engine_badge img]][image_engine_badge]
-	Library that converts layers instructions to pixels on the screen.
-	
- - Graphics -  [![][graphics_badge img]][graphics_badge]
-	 Basic Kotlin wrap for OpenGLES state machine.
+## Libraries:
+### Main library:
+ - `Image Engine` - [![][image_engine_badge img]][image_engine_badge]
+ 
+ 	Library that converts visual instructions to pixels on the screen.
+
+### Utils libraries:
+ - `Graphics` -  [![][graphics_badge img]][graphics_badge]
+ 	
+	Basic Kotlin wrap for OpenGLES state machine.
 	 
- - Geometry - [![][geometry_badge img]][geometry_badge]  
-	 Pure kotlin library for geometric shapes representation and calculations.
+ - `Geometry` - [![][geometry_badge img]][geometry_badge]  
+	
+	Pure kotlin library for geometric shapes representation and calculations.
  
 [build]:https://github.com/Colovaria-Graphics/Colovaria-Android/actions/workflows/android_build.yml  
 [build img]:https://github.com/Colovaria-Graphics/Colovaria-Android/actions/workflows/android_build.yml/badge.svg?branch=main  
