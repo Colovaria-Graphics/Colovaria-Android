@@ -20,6 +20,26 @@
 	
 	Pure kotlin library for geometric shapes representation and calculations.
  
+## Usage:
+
+### Instructions:
+See each library spesific README for specific instructions:
+ - [Image Engine README](https://github.com/Colovaria-Graphics/Colovaria-Android/blob/main/image_engine/README.md)
+ - [Graphics README](https://github.com/Colovaria-Graphics/Colovaria-Android/blob/main/graphics/README.md)
+ - [Geometry README](https://github.com/Colovaria-Graphics/Colovaria-Android/blob/main/geometry/README.md)
+ 
+### Dependencies:
+```kotlin
+// For image engine:
+implementation "io.github.colovaria-graphics:image_engine:+"
+
+// For graphics:
+implementation "io.github.colovaria-graphics:graphics:+"
+
+// For geometry:
+implementation "io.github.colovaria-graphics:geometry:+"
+```
+ 
 [build]:https://github.com/Colovaria-Graphics/Colovaria-Android/actions/workflows/android_build.yml  
 [build img]:https://github.com/Colovaria-Graphics/Colovaria-Android/actions/workflows/android_build.yml/badge.svg?branch=main  
   
