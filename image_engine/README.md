@@ -44,6 +44,7 @@ Now we can send `Frame`'s to the engine using `imageEngine.setFrame()`.
 
 ### Image loader:
 In order to be very generic, `ImageEngine` dosen't implement image loading realted logic, so the library user must implement it itself (by implementeing the interace `ImageLoader`) and passing it to the engine.
+
 You can take [Glide](https://github.com/bumptech/glide) implementation from [here](https://github.com/Colovaria-Graphics/Colovaria-Android/tree/main/image_engine/smaples/glide_image_loader).
 
 [image_engine_badge]:https://search.maven.org/artifact/io.github.colovaria-graphics/image_engine  
