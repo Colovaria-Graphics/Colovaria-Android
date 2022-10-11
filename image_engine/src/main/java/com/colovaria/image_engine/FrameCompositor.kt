@@ -80,7 +80,8 @@ class FrameCompositor(
         frameBufferPool.dispose()
     }
 
-    private fun renderInternal(frame: Frame, renderToSurface: Boolean) : Unit = frameBufferPool.withMany(PASS_FBO_NUM) { passFrameBuffers ->
+    @Suppress("ProtectedInFinal")
+    protected fun renderInternal(frame: Frame, renderToSurface: Boolean) : Unit = frameBufferPool.withMany(PASS_FBO_NUM) { passFrameBuffers ->
         if (frame.layers.isEmpty()) {
             GUtils.clear(frame.backgroundColor)
         } else {
