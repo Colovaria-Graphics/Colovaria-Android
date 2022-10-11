@@ -20,6 +20,7 @@ class Blender(context: Context, val size: Size) {
 
     private val blenderSoftware = GSoftware(context, "shaders/blender.vert", "shaders/blander.frag")
 
+    // TODO: why not to use single struct and convert to the other in the vertex shader.
     private val blenderDrawer = GDynamicDrawer.Factory.create(blenderSoftware,
         GPUStruct("position", GenericBuffers.TRIANGLE_STRIP_2D_FULL_SIZE,
             2, GenericBuffers.TRIANGLE_STRIP_2D_FULL),
@@ -68,8 +69,7 @@ class Blender(context: Context, val size: Size) {
         val scaleY = 1f / (ratioScale.height * blending.scale.y)
 
         return GMat4(
-            Matrix4F
-                .identity()
+            Matrix4F.identity()
                 .translate(-0.5f, -0.5f, 0f)
                 .scale(scaleX, scaleY, 1f)
                 .translate(

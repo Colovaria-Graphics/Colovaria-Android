@@ -6,6 +6,7 @@ import com.colovaria.geometry.Size
 import com.colovaria.graphics.GTexture
 import com.colovaria.image_engine.api.blend.BlenderInstruction
 import com.colovaria.image_engine.api.texture.TextInstruction
+import com.colovaria.image_engine.pipeline.drawers.base.CachedTextureDrawer
 import com.colovaria.image_engine.text.CanvasTextFactory
 import com.colovaria.image_engine.text.FontProvider
 import com.colovaria.image_engine.text.TextMeasurer
@@ -15,7 +16,7 @@ class TextDrawer(
     private val textMeasurer: TextMeasurer,
     private val fontProvider: FontProvider,
     private val size: Size,
-) : TextureDrawer<TextInstruction>() {
+) : CachedTextureDrawer<TextInstruction>() {
     private val bitmapCache = BitmapsLruCache()
 
     override fun drawInternal(

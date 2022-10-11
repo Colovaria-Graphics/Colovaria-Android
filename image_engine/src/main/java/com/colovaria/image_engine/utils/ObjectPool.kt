@@ -12,6 +12,24 @@ class ObjectPool<T>(
         repeat(initialAmount) { pool.add(factory()) }
     }
 
+    fun <R> with(func: (T) -> R) : R {
+        val t = acquire()
+        try {
+            return func(t)
+        } finally {
+            recycle(t)
+        }
+    }
+
+    fun <R> withMany(count: Int, func: (List<T>) -> R) : R {
+        val t = acquireMany(count)
+        try {
+            return func(t)
+        } finally {
+            recycleMany(t)
+        }
+    }
+
     fun acquire() : T {
         return if (pool.isEmpty()) factory() else pool.removeAt(0)
     }

@@ -11,11 +11,12 @@ import com.colovaria.image_engine.api.blend.BlenderInstruction
 import com.colovaria.image_engine.api.texture.CircleInstruction
 import com.colovaria.image_engine.api.texture.RectInstruction
 import com.colovaria.image_engine.api.texture.ShapeInstruction
+import com.colovaria.image_engine.pipeline.drawers.base.CachedTextureDrawer
 import com.colovaria.image_engine.utils.BitmapsLruCache
 
 class ShapeDrawer(
     private val size : Size,
-) : TextureDrawer<ShapeInstruction>() {
+) : CachedTextureDrawer<ShapeInstruction>() {
     private val bitmapCache = BitmapsLruCache()
 
     override fun drawInternal(

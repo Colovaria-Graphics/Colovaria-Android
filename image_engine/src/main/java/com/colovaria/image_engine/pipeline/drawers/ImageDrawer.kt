@@ -6,12 +6,13 @@ import com.colovaria.graphics.GTexture
 import com.colovaria.image_engine.api.blend.BlenderInstruction
 import com.colovaria.image_engine.api.resources.ImageLoader
 import com.colovaria.image_engine.api.texture.ImageInstruction
+import com.colovaria.image_engine.pipeline.drawers.base.CachedTextureDrawer
 
 class ImageDrawer(
     private val imageLoader: ImageLoader,
     private val size: Size,
     private val optimizeImageSize: Boolean,
-) : TextureDrawer<ImageInstruction>() {
+) : CachedTextureDrawer<ImageInstruction>() {
     private val fullCropSize = SizeF(1f, 1f)
 
     override fun drawInternal(instruction: ImageInstruction, blending: BlenderInstruction): GTexture {

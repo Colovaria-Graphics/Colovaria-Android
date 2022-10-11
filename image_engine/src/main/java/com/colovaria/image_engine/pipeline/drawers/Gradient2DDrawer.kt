@@ -9,15 +9,17 @@ import com.colovaria.graphics.uniforms.GVec2FArray
 import com.colovaria.graphics.uniforms.GVec3FArray
 import com.colovaria.image_engine.api.blend.BlenderInstruction
 import com.colovaria.image_engine.api.texture.Gradient2DInstruction
+import com.colovaria.image_engine.pipeline.drawers.base.CachedTextureDrawer
 import com.colovaria.image_engine.utils.GenericBuffers
 
 class Gradient2DDrawer(
     context: Context,
     val size: Size
-) : TextureDrawer<Gradient2DInstruction>() {
+) : CachedTextureDrawer<Gradient2DInstruction>() {
     private val gradientSoftware =
         GSoftware(context, "shaders/gradient2d.vert", "shaders/gradient2d.frag")
 
+    // TODO: why not to use single struct and convert to the other in the vertex shader.
     private val gradientDrawer = GDynamicDrawer.Factory.create(gradientSoftware,
         GPUStruct("position", GenericBuffers.TRIANGLE_STRIP_2D_FULL_SIZE,
             2, GenericBuffers.TRIANGLE_STRIP_2D_FULL),

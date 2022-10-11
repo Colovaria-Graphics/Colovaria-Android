@@ -4,6 +4,7 @@ import com.colovaria.graphics.uniforms.GColor
 import com.colovaria.image_engine.api.text.Font
 import com.colovaria.image_engine.api.text.TextAlignment
 import com.colovaria.image_engine.api.text.TextDirection
+import com.colovaria.image_engine.api.texture.base.DrawerInstruction
 
 data class TextInstruction(
     val text: String,
@@ -18,4 +19,4 @@ data class TextInstruction(
     val direction: TextDirection,
     val alignment: TextAlignment,
     val maxWidth: Float
-) : TextureInstruction()
+) : DrawerInstruction

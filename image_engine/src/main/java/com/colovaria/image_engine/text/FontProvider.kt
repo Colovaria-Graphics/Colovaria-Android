@@ -2,8 +2,8 @@ package com.colovaria.image_engine.text
 
 import android.content.Context
 import android.graphics.Typeface
-import com.colovaria.image_engine.api.text.Font
 import com.colovaria.image_engine.api.resources.*
+import com.colovaria.image_engine.api.text.Font
 
 class FontProvider(
     private val context: Context,
@@ -18,11 +18,10 @@ class FontProvider(
         }
 
         return Typeface.create(family, when {
-            !bold && !italic -> Typeface.NORMAL
+            bold && italic -> Typeface.BOLD_ITALIC
             bold && !italic -> Typeface.BOLD
             !bold && italic -> Typeface.ITALIC
-            bold && italic -> Typeface.BOLD_ITALIC
-            else -> error("Unknown state")
+            else -> Typeface.NORMAL
         })
     }
 }
