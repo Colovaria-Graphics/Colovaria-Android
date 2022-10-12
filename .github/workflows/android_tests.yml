@@ -24,8 +24,8 @@ jobs:
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 33
+          api-level: 29
           arch: x86_64
-          target: google_apis
+          // target: google_apis
           script: ./gradlew connectedCheck
 
