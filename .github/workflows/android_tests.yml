@@ -21,7 +21,7 @@ jobs:
           api-level: 29
           arch: x86_64
           disk-size: 5GB
-          emulator-options: -gpu host -no-snapshot -noaudio -no-boot-anim
+          emulator-options: -no-window -gpu host -no-snapshot -noaudio -no-boot-anim
           script: ./gradlew connectedCheck
 
       - name: Android Test Report
