@@ -244,6 +244,50 @@ object GLES {
         GLES20.glUniform1i(location, x)
     }
 
+    fun glUniform1f(location: Int, x: Float) = wrapWithErrorCheck {
+        GLES20.glUniform1f(location, x)
+    }
+
+    fun glUniform2f(location: Int, x: Float, y: Float) = wrapWithErrorCheck {
+        GLES20.glUniform2f(location, x, y)
+    }
+
+    fun glUniform3f(location: Int, x: Float, y: Float, z: Float) = wrapWithErrorCheck {
+        GLES20.glUniform3f(location, x, y, z)
+    }
+
+    fun glUniform4f(location: Int, x: Float, y: Float, z: Float, w: Float) = wrapWithErrorCheck {
+        GLES20.glUniform4f(location, x, y, z, w)
+    }
+
+    fun glUniform2fv(
+        location: Int,
+        count: Int,
+        value: FloatArray,
+        offset: Int
+    ) = wrapWithErrorCheck {
+        GLES20.glUniform2fv(location, count, value, offset)
+    }
+
+    fun glUniform3fv(
+        location: Int,
+        count: Int,
+        value: FloatArray,
+        offset: Int
+    ) = wrapWithErrorCheck {
+        GLES20.glUniform3fv(location, count, value, offset)
+    }
+
+    fun glUniformMatrix4fv(
+        location: Int,
+        count: Int,
+        transpose: Boolean,
+        value: FloatArray,
+        offset: Int
+    ) = wrapWithErrorCheck {
+        GLES20.glUniformMatrix4fv(location, count, transpose, value, offset)
+    }
+
     fun glDeleteTexture(handle: Int) = wrapWithErrorCheck {
         GLES20.glDeleteTextures(1, intArrayOf(handle), 0)
     }
