@@ -31,9 +31,9 @@ class TestTextDrawer : TestClass() {
 
     @Before
     fun setup() {
-        val display = GDisplay.Factory.create()
-        val gpuContext = GContext.Factory.create(display)
-        val surface = GSurface.Factory.create(display, Size(1, 1))
+        val display = GDisplay.create()
+        val gpuContext = GContext.create(display)
+        val surface = GSurface.create(display, Size(1, 1))
         gpuContext.bind(surface)
     }
 

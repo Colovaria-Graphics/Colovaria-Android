@@ -3,22 +3,25 @@ package com.colovaria.image_engine.utils
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import com.colovaria.graphics.utils.size
-import org.junit.Assert.assertTrue
+import com.google.common.truth.Truth.assertThat
 import kotlin.math.abs
 
 object BitmapUtils {
     fun assertBitmapEqual(bitmap: Bitmap, assetPath: String, maxDiff: Float = 0.0099999f) {
-        assertTrue(compareBitmapToAssert(bitmap, assetPath) <= maxDiff)
+        assertThat(compareBitmapToAssert(bitmap, assetPath)).isLessThan(maxDiff)
     }
 
-    fun compareBitmapToAssert(bitmap: Bitmap, assetPath: String) : Float {
+    /**
+     * Like computeBitmapsDiffPercentage, but the second bitmap is asset.
+     */
+    private fun compareBitmapToAssert(bitmap: Bitmap, assetPath: String) : Float {
         return computeBitmapsDiffPercentage(bitmap, loadBitmapFromAssetPath(assetPath))
     }
 
     /**
      * This function calculate the different in percentages [0..1] between two given bitmaps.
      */
-    fun computeBitmapsDiffPercentage(bitmapA: Bitmap, bitmapB: Bitmap) : Float {
+    private fun computeBitmapsDiffPercentage(bitmapA: Bitmap, bitmapB: Bitmap) : Float {
         if (bitmapA.size() != bitmapB.size()) {
             // Bitmaps in different size, return 100%.
             return 1f
@@ -38,12 +41,12 @@ object BitmapUtils {
             val pixelA = bufferA[i]
             val pixelB = bufferB[i]
 
-            totalDiff += (
-                abs(((pixelA shr 0) and 0xFF) - ((pixelB shr 0) and 0xFF)) +
-                abs(((pixelA shr 8) and 0xFF) - ((pixelB shr 8) and 0xFF)) +
-                abs(((pixelA shr 16) and 0xFF) - ((pixelB shr 16) and 0xFF)) +
-                abs(((pixelA shr 24) and 0xFF) - ((pixelB shr 24) and 0xFF))
-            ) * colorWeight
+            val diff = abs(((pixelA shr 0) and 0xFF) - ((pixelB shr 0) and 0xFF)) +
+                       abs(((pixelA shr 8) and 0xFF) - ((pixelB shr 8) and 0xFF)) +
+                       abs(((pixelA shr 16) and 0xFF) - ((pixelB shr 16) and 0xFF)) +
+                       abs(((pixelA shr 24) and 0xFF) - ((pixelB shr 24) and 0xFF))
+
+            totalDiff += diff * colorWeight
         }
         
         return totalDiff.toFloat()
