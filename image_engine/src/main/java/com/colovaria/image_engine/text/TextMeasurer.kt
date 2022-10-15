@@ -21,7 +21,7 @@ class TextMeasurer(
                     textInstruction,
                     canvasSize,
                     fontProvider,
-                    antiAlias = false
+                    antiAlias = true  // Some devices ignore `false`, so we must use true for consistency.
                 ).let(this@TextMeasurer::boundsByLines).size
                 put(key, size)
                 size
