@@ -1,33 +1,34 @@
 package com.colovaria.graphics
 
-import android.opengl.GLES32
+import android.opengl.GLES20
+import com.colovaria.graphics.wrappers.GLES
 
 class GProgram : GHandle {
-    constructor() : super(GLES32.glCreateProgram())
+    constructor() : super(GLES.glCreateProgram())
 
     constructor(shaders: List<GShader>) : this() {
         attachShadersToProgram(shaders)
     }
 
     fun bind() {
-        GLES32.glUseProgram(handle)
+        GLES.glUseProgram(handle)
     }
 
     override fun dispose() {
-        GLES32.glDeleteProgram(handle)
+        GLES.glDeleteProgram(handle)
         disposed = true
     }
 
     private fun attachShadersToProgram(shaders: List<GShader>) {
-        shaders.forEach { GLES32.glAttachShader(handle, it.handle) }
-        GLES32.glLinkProgram(handle)
-        shaders.forEach { GLES32.glDetachShader(handle, it.handle) }
+        shaders.forEach { GLES.glAttachShader(handle, it.handle) }
+        GLES.glLinkProgram(handle)
+        shaders.forEach { GLES.glDetachShader(handle, it.handle) }
         assertProgramLinked()
     }
 
     private fun assertProgramLinked() {
-        val isLinked = intArrayOf(GLES32.GL_FALSE)
-        GLES32.glGetProgramiv(handle, GLES32.GL_LINK_STATUS, isLinked, 0)
-        assert(isLinked[0] == GLES32.GL_TRUE) { GLES32.glGetProgramInfoLog(handle) }
+        val isLinked = intArrayOf(GLES20.GL_FALSE)
+        GLES.glGetProgramiv(handle, GLES20.GL_LINK_STATUS, isLinked, 0)
+        assert(isLinked[0] == GLES20.GL_TRUE) { GLES.glGetProgramInfoLog(handle) }
     }
 }

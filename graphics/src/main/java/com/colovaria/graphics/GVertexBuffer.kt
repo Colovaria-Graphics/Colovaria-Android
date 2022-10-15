@@ -1,6 +1,7 @@
 package com.colovaria.graphics
 
-import android.opengl.GLES32
+import android.opengl.GLES20
+import com.colovaria.graphics.wrappers.GLES
 import java.nio.*
 
 class GVertexBuffer : GHandle, GBindableHandle {
@@ -13,11 +14,11 @@ class GVertexBuffer : GHandle, GBindableHandle {
     override fun bind() : BindReference {
         val lastBounded = boundedHandle()
 
-        if (lastBounded != handle) GLES.glBindBuffer(GLES32.GL_ARRAY_BUFFER, handle)
+        if (lastBounded != handle) GLES.glBindBuffer(GLES20.GL_ARRAY_BUFFER, handle)
 
         return BindReference {
             if (lastBounded != handle) {
-                GLES.glBindBuffer(GLES32.GL_ARRAY_BUFFER, lastBounded)
+                GLES.glBindBuffer(GLES20.GL_ARRAY_BUFFER, lastBounded)
             }
         }
     }
@@ -33,16 +34,16 @@ class GVertexBuffer : GHandle, GBindableHandle {
         } * size
 
         withBind {
-            GLES32.glBufferData(GLES32.GL_ARRAY_BUFFER, bytesSize, buffer, GLES32.GL_STATIC_DRAW)
+            GLES.glBufferData(GLES20.GL_ARRAY_BUFFER, bytesSize, buffer, GLES20.GL_STATIC_DRAW)
         }
     }
 
     override fun dispose() {
-        GLES32.glDeleteBuffers(1, intArrayOf(handle), 0)
+        GLES.glDeleteBuffer(handle)
         disposed = true
     }
 
     companion object {
-        fun boundedHandle() = GLES.glGetIntegerv(GLES32.GL_ARRAY_BUFFER_BINDING)
+        fun boundedHandle() = GLES.glGetIntegerv(GLES20.GL_ARRAY_BUFFER_BINDING)
     }
 }

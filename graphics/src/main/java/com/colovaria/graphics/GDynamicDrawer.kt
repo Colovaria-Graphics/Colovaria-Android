@@ -1,6 +1,7 @@
 package com.colovaria.graphics
 
-import android.opengl.GLES32
+import android.opengl.GLES20
+import com.colovaria.graphics.wrappers.GLES
 
 class GDynamicDrawer private constructor(
     private val program: GProgram,
@@ -26,13 +27,13 @@ class GDynamicDrawer private constructor(
         program.bind()
 
         uniforms.forEach { (name, uniform) ->
-            val attribLocation = GLES32.glGetUniformLocation(program.handle, name)
+            val attribLocation = GLES.glGetUniformLocation(program.handle, name)
             assert(attribLocation >= 0)
             uniform.putUniform(attribLocation)
         }
 
         vertices.forEach { (name, vertex) ->
-            val attribLocation = GLES32.glGetAttribLocation(program.handle, name)
+            val attribLocation = GLES.glGetAttribLocation(program.handle, name)
             assert(attribLocation >= 0)
             vertex.putVertex(attribLocation)
 
@@ -40,23 +41,23 @@ class GDynamicDrawer private constructor(
         }
 
         vertexBufferEntries.forEach {
-            val attribLocation = GLES32.glGetAttribLocation(program.handle, it.name)
+            val attribLocation = GLES.glGetAttribLocation(program.handle, it.name)
             assert(attribLocation >= 0)
 
             it.vertexBuffer.withBind {
-                GLES32.glVertexAttribPointer(attribLocation, it.vertexSize, GLES32.GL_FLOAT, false, 0, 0)
+                GLES.glVertexAttribPointer(attribLocation, it.vertexSize, GLES20.GL_FLOAT, false, 0, 0)
             }
 
             enabledVertexAttrib.add(attribLocation)
         }
 
-        enabledVertexAttrib.forEach {  GLES32.glEnableVertexAttribArray(it) }
+        enabledVertexAttrib.forEach {  GLES.glEnableVertexAttribArray(it) }
 
         vertexArray.withBind {
-            GLES32.glDrawArrays(mode, 0, vertexCount)
+            GLES.glDrawArrays(mode, 0, vertexCount)
         }
 
-        enabledVertexAttrib.forEach {  GLES32.glDisableVertexAttribArray(it) }
+        enabledVertexAttrib.forEach {  GLES.glDisableVertexAttribArray(it) }
         enabledVertexAttrib.clear()
         vaoBindReference.unbind()
     }

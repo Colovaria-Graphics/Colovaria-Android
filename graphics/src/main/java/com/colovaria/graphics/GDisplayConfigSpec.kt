@@ -5,6 +5,9 @@ import android.opengl.EGLConfig
 import android.opengl.EGLDisplay
 import com.colovaria.graphics.egl.GEGLUtils
 
+/**
+ * This data-class represent all the possible specs of a egl display.
+ */
 data class GDisplayConfigSpec(
     val redSize: Int        = 8,
     val greenSize: Int      = 8,

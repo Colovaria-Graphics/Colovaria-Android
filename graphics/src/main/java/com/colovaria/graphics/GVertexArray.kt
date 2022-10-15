@@ -1,5 +1,7 @@
 package com.colovaria.graphics
 
+import com.colovaria.graphics.wrappers.GLES
+
 class GVertexArray : GHandle(GLES.glGenVertexArray()), GBindableHandle {
     override fun bind() : BindReference {
         GLES.glBindVertexArray(handle)

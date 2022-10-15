@@ -8,6 +8,9 @@ interface GBindableHandle {
     fun bind() : BindReference
 }
 
+/**
+ * This extension function execute safely a given function under a bind relation.
+ */
 inline fun <T> GBindableHandle.withBind(func: () -> T) : T {
     val bindReference = bind()
     try {

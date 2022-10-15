@@ -11,21 +11,21 @@ class GSurface private constructor(
     val display: GDisplay,
     val eglSurface: EGLSurface,
 ) : GObject() {
-    private val width: Int
+    val width: Int
     get() {
         val width = intArrayOf(0)
         assert(EGL14.eglQuerySurface(display.eglDisplay, eglSurface, EGL14.EGL_WIDTH, width, 0))
         return width[0]
     }
 
-    private val height: Int
+    val height: Int
     get() {
         val height = intArrayOf(0)
         assert(EGL14.eglQuerySurface(display.eglDisplay, eglSurface, EGL14.EGL_HEIGHT, height, 0))
         return height[0]
     }
 
-    private val size: Size
+    val size: Size
     get() = Size(width, height)
 
     override fun dispose() {

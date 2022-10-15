@@ -1,7 +1,8 @@
 package com.colovaria.graphics
 
 import android.content.Context
-import android.opengl.GLES32
+import android.opengl.GLES20
+import com.colovaria.graphics.wrappers.GLES
 
 class GShader : GHandle {
     constructor(type: Int) : super(GLES.glCreateShader(type))
@@ -15,19 +16,19 @@ class GShader : GHandle {
     }
 
     override fun dispose() {
-        GLES32.glDeleteShader(handle)
+        GLES.glDeleteShader(handle)
         disposed = true
     }
 
     private fun attachCodeToShader(code: String) {
-        GLES32.glShaderSource(handle, code)
-        GLES32.glCompileShader(handle)
+        GLES.glShaderSource(handle, code)
+        GLES.glCompileShader(handle)
         assertShaderCompiled()
     }
 
     private fun assertShaderCompiled() {
-        val isLinked = intArrayOf(GLES32.GL_FALSE)
-        GLES32.glGetShaderiv(handle, GLES32.GL_COMPILE_STATUS, isLinked, 0)
-        assert(isLinked[0] == GLES32.GL_TRUE) { GLES32.glGetShaderInfoLog(handle) }
+        val isLinked = intArrayOf(GLES20.GL_FALSE)
+        GLES.glGetShaderiv(handle, GLES20.GL_COMPILE_STATUS, isLinked, 0)
+        assert(isLinked[0] == GLES20.GL_TRUE) { GLES.glGetShaderInfoLog(handle) }
     }
 }
