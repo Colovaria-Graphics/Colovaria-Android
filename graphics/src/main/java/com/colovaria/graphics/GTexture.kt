@@ -99,8 +99,7 @@ class GTexture : GHandle, GUniform, GBindableHandle {
 
     private fun commonInit() = withBind {
         setFiltering(GLES20.GL_LINEAR, GLES20.GL_NEAREST)
-        // TODO: setWrap(GLES32.GL_CLAMP_TO_BORDER)
-        // TODO: setBorderColor(GColor.TRANSPARENT)
+        setWrap(GLES20.GL_CLAMP_TO_EDGE)
     }
 
     private fun cropBitmap(bitmap: Bitmap, crop: RectF) : Bitmap {
