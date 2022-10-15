@@ -18,7 +18,7 @@ jobs:
         with:
           api-level: 29
           arch: x86_64
-          script: ./gradlew connectedCheck
+          script: ./gradlew connectedAndroidTest
     
       - name: Upload Test Reports Folder
         uses: actions/upload-artifact@v2
