@@ -6,6 +6,7 @@ import com.colovaria.geometry.Rect
 import com.colovaria.geometry.Size
 import com.colovaria.image_engine.api.text.Font
 import com.colovaria.image_engine.api.texture.TextInstruction
+import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.roundToInt
 
@@ -35,7 +36,7 @@ class TextMeasurer(
 
     private fun boundsByLines(layout: StaticLayout) : Rect {
         val width = (0 until layout.lineCount)
-            .maxOf { ceil(layout.getLineWidth(it)) }
+            .maxOf { ceil(abs(layout.getLineLeft(it) - layout.getLineRight(it))) }
             .roundToInt()
 
         return Rect(0, layout.height, width, 0)

@@ -28,7 +28,13 @@ class TextDrawer(
         val canvas = Canvas(bitmap)
 
         bitmap.eraseColor(Color.TRANSPARENT)
-        CanvasTextFactory.createStaticLayout(instruction, size, fontProvider).draw(canvas)
+
+        val staticLayout = CanvasTextFactory.createStaticLayout(instruction, size, fontProvider)
+        canvas.translate(
+            -((0 until staticLayout.lineCount).minOfOrNull(staticLayout::getLineLeft) ?: 0f),
+            0f
+        )
+        staticLayout.draw(canvas)
 
         return GTexture(bitmap)
     }

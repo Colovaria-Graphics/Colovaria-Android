@@ -19,7 +19,7 @@ object CanvasTextFactory {
         return createStaticLayout(instruction, canvasSize, createPaint(instruction, canvasSize, fontProvider, antiAlias))
     }
 
-    private fun createPaint(
+    fun createPaint(
         instruction: TextInstruction,
         canvasSize: Size,
         fontProvider: FontProvider,
@@ -38,7 +38,7 @@ object CanvasTextFactory {
         }
     }
 
-    private fun createStaticLayout(instruction: TextInstruction, canvasSize: Size, paint: TextPaint) : StaticLayout {
+    fun createStaticLayout(instruction: TextInstruction, canvasSize: Size, paint: TextPaint) : StaticLayout {
         return StaticLayout.Builder.obtain(
             instruction.text,
             0,
