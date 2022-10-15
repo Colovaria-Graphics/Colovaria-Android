@@ -1,10 +1,10 @@
 package com.colovaria.graphics.uniforms
 
-import android.opengl.GLES32
 import com.colovaria.graphics.GUniform
+import com.colovaria.graphics.wrappers.GLES
 
 data class GInt(val value: Int) : GUniform {
     override fun putUniform(attribLocation: Int) {
-        GLES32.glUniform1i(attribLocation, value)
+        GLES.glUniform1i(attribLocation, value)
     }
 }

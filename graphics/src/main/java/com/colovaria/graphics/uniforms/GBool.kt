@@ -1,10 +1,10 @@
 package com.colovaria.graphics.uniforms
 
-import android.opengl.GLES32
 import com.colovaria.graphics.GUniform
+import com.colovaria.graphics.wrappers.GLES
 
 data class GBool(val value: Boolean) : GUniform {
     override fun putUniform(attribLocation: Int) {
-        GLES32.glUniform1i(attribLocation, if (value) 1 else 0)
+        GLES.glUniform1i(attribLocation, if (value) 1 else 0)
     }
 }

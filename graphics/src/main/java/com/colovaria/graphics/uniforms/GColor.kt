@@ -1,10 +1,10 @@
 package com.colovaria.graphics.uniforms
 
 import android.graphics.Color
-import android.opengl.GLES32
 import com.colovaria.geometry.Vector3F
 import com.colovaria.geometry.Vector4F
 import com.colovaria.graphics.GUniform
+import com.colovaria.graphics.wrappers.GLES
 
 data class GColor(
     val red: Float,
@@ -21,7 +21,7 @@ data class GColor(
     fun asAndroidColor() = Color.valueOf(red, green, blue, alpha)
 
     override fun putUniform(attribLocation: Int) {
-        GLES32.glUniform4f(attribLocation, red, green, blue, alpha)
+        GLES.glUniform4f(attribLocation, red, green, blue, alpha)
     }
 
     companion object {
