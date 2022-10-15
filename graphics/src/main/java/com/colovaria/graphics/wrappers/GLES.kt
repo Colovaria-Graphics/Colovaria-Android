@@ -179,7 +179,7 @@ object GLES {
         GLES20.glGetProgramiv(program, pname, params, offset)
     }
 
-    fun glGetProgramInfoLog(program: Int) = wrapWithErrorCheck {
+    fun glGetProgramInfoLog(program: Int) : String = wrapWithErrorCheck {
         return@wrapWithErrorCheck GLES20.glGetProgramInfoLog(program)
     }
 
