@@ -27,12 +27,11 @@ object CanvasTextFactory {
     ) : TextPaint {
         return TextPaint().apply {
             isAntiAlias = antiAlias
-            letterSpacing = instruction.spacing // TODO: what are the units?
+            letterSpacing = instruction.spacing * canvasSize.width
             textSize = instruction.size * canvasSize.height
             color = instruction.color.asAndroidColor().toArgb()
             strokeWidth = 0f
             style = Paint.Style.FILL_AND_STROKE
-            // TODO: support bold and italic.
             typeface = fontProvider.provide(instruction.font, instruction.bold, instruction.italic)
             setShadowLayer(0f, 0f, 0f, 0)
         }
@@ -46,7 +45,7 @@ object CanvasTextFactory {
             paint,
             (instruction.maxWidth * canvasSize.width).roundToInt()
         ).apply {
-            setLineSpacing(instruction.lineSpacing, 1f)
+            setLineSpacing(instruction.lineSpacing * canvasSize.height, 1f)
             setMaxLines(instruction.maxLines)
             setTextDirection(instruction.direction.toAndroidDirection())
             setAlignment(instruction.alignment.toAndroidAlignment())

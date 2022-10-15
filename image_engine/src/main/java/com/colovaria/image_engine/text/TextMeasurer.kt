@@ -6,7 +6,6 @@ import com.colovaria.geometry.Rect
 import com.colovaria.geometry.Size
 import com.colovaria.image_engine.api.text.Font
 import com.colovaria.image_engine.api.texture.TextInstruction
-import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.roundToInt
 
@@ -35,11 +34,14 @@ class TextMeasurer(
     }
 
     private fun boundsByLines(layout: StaticLayout) : Rect {
-        val width = (0 until layout.lineCount)
-            .maxOf { ceil(abs(layout.getLineLeft(it) - layout.getLineRight(it))) }
-            .roundToInt()
+        val textAsCharArray = layout.text.toString().toCharArray()
+        val width = (0 until layout.lineCount).maxOfOrNull {
+            val lineStart = layout.getLineStart(it)
+            val lineEnd = layout.getLineEnd(it)
+            layout.paint.measureText(textAsCharArray, lineStart, lineEnd - lineStart)
+        } ?: 0f
 
-        return Rect(0, layout.height, width, 0)
+        return Rect(0, layout.height, ceil(width).roundToInt(), 0)
     }
 
     private data class TextSizeFactors(
