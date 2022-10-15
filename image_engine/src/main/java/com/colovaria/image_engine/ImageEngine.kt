@@ -69,8 +69,8 @@ class ImageEngine(
     }
 
     private fun initInternal() {
-        display = GDisplay.Factory.create()
-        gpuContext = GContext.Factory.create(display)
+        display = GDisplay.create()
+        gpuContext = GContext.create(display)
         setTargetSurfaceInternal(null)
     }
 
@@ -82,9 +82,9 @@ class ImageEngine(
         surface?.dispose()
 
         surface = when (newSurface) {
-            null -> GSurface.Factory.create(display, Size(1, 1))
-            is Surface -> GSurface.Factory.create(display, newSurface)
-            is SurfaceTexture -> GSurface.Factory.create(display, newSurface)
+            null -> GSurface.create(display, Size(1, 1))
+            is Surface -> GSurface.create(display, newSurface)
+            is SurfaceTexture -> GSurface.create(display, newSurface)
             else -> error("Unknown surface type: $newSurface")
         }
 

@@ -16,7 +16,7 @@ class HSVProcessor(
     private val hsvSoftware = GSoftware(context, "shaders/hsv.vert", "shaders/hsv.frag")
 
     // TODO: why not to use single struct and convert to the other in the vertex shader.
-    private val hsvDrawer = GDynamicDrawer.Factory.create(hsvSoftware,
+    private val hsvDrawer = GDynamicDrawer.create(hsvSoftware,
         GPUStruct("position", GenericBuffers.TRIANGLE_STRIP_2D_FULL_SIZE,
             2, GenericBuffers.TRIANGLE_STRIP_2D_FULL),
         GPUStruct("texturePosition", GenericBuffers.TRIANGLE_STRIP_2D_TEXTURE_SIZE,
@@ -36,7 +36,7 @@ class HSVProcessor(
                 ), mapOf())
         }
 
-        return fbo.texture.clone()
+        return fbo.cloneTexture()
     }
 
     override fun dispose() {

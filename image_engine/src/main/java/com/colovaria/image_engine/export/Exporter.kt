@@ -8,6 +8,7 @@ import com.colovaria.graphics.GFrameBuffer
 import com.colovaria.graphics.egl.GContext
 import com.colovaria.graphics.egl.GDisplay
 import com.colovaria.graphics.egl.GSurface
+import com.colovaria.graphics.withBind
 import com.colovaria.image_engine.FrameCompositor
 import com.colovaria.image_engine.api.Frame
 import com.colovaria.image_engine.api.resources.ImageLoader
@@ -31,9 +32,9 @@ class Exporter(
 
     init {
         executor.submit {
-            display = GDisplay.Factory.create()
-            gpuContext = GContext.Factory.create(display)
-            surface = GSurface.Factory.create(display, size)
+            display = GDisplay.create()
+            gpuContext = GContext.create(display)
+            surface = GSurface.create(display, size)
 
             contextBindReference = gpuContext.bind(surface)
 

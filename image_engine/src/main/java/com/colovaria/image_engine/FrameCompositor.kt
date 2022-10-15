@@ -5,6 +5,7 @@ import com.colovaria.geometry.Size
 import com.colovaria.graphics.GFrameBuffer
 import com.colovaria.graphics.GTexture
 import com.colovaria.graphics.GUtils
+import com.colovaria.graphics.withBind
 import com.colovaria.image_engine.api.Frame
 import com.colovaria.image_engine.api.Layer
 import com.colovaria.image_engine.api.blend.BlenderInstruction
@@ -93,16 +94,16 @@ class FrameCompositor(
             val lastFrameBuffer = passFrameBuffers[index % PASS_FBO_NUM]
             val currentFrameBuffer = passFrameBuffers[(index + 1) % PASS_FBO_NUM]
 
-            val layerTexture = computeTextureInstruction(layer, lastFrameBuffer.texture)
+            val layerTexture = computeTextureInstruction(layer, lastFrameBuffer.texture!!)
             val maskTexture = layer.masking?.mask?.run {
-                computeTextureInstruction(this, lastFrameBuffer.texture)
+                computeTextureInstruction(this, lastFrameBuffer.texture!!)
             }
 
             val bindReference = if (!isLastPass) currentFrameBuffer.bind() else null
             GUtils.clear()
 
             blender.blend(
-                lastFrameBuffer.texture,
+                lastFrameBuffer.texture!!,
                 layerTexture,
                 layer.blending,
                 maskTexture = maskTexture,
@@ -131,7 +132,7 @@ class FrameCompositor(
                 frameBuffer.withBind {
                     this@FrameCompositor.renderInternal(instruction.frame, false)
                 }
-                return@with frameBuffer.texture.clone()
+                return@with frameBuffer.cloneTexture()
             }
         }
     }
