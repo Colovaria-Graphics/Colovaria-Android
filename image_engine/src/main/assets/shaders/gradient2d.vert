@@ -1,9 +1,7 @@
-#version 300 es
+attribute vec2 position;
+attribute vec2 texturePosition;
 
-in vec2 position;
-in vec2 texturePosition;
-
-out vec2 pixelPosition;
+varying vec2 pixelPosition;
 
 void main() {
     pixelPosition = texturePosition;

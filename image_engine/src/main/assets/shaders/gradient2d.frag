@@ -1,36 +1,62 @@
-#version 300 es
-
-#define MAX_ACTIVE_DOTS (6)
+#define COMPUTE_COLOR_AND_RETURN gl_FragColor = vec4(color / totalWeight, 1.0); return
 
 precision mediump float;
 
-uniform vec3 colors[MAX_ACTIVE_DOTS];
-uniform vec2 positions[MAX_ACTIVE_DOTS];
-uniform int activeDots;
+uniform vec3 color0;
+uniform vec3 color1;
+uniform vec3 color2;
+uniform vec3 color3;
+uniform vec3 color4;
+uniform vec3 color5;
 
-in vec2 pixelPosition;
+uniform vec2 position0;
+uniform vec2 position1;
+uniform vec2 position2;
+uniform vec2 position3;
+uniform vec2 position4;
+uniform vec2 position5;
 
-out vec4 fragColor;
+uniform int activePoints;
+
+varying vec2 pixelPosition;
+
+float computePointWeight(vec2 position, vec2 colorPosition) {
+    vec2 powDistance = (position - colorPosition) * (position - colorPosition);
+    return 1.0 / (powDistance.x + powDistance.y);
+}
 
 void main() {
     vec3 color = vec3(0.0);
     float totalWeight = 0.0;
 
-    for (int i = 0; i < activeDots; i++) {
-        float weight = pow(positions[i].x - pixelPosition.x, 2.0) + pow(positions[i].y - pixelPosition.y, 2.0);
+    float weight0 = computePointWeight(pixelPosition, position0);
+    color += color0 * weight0;
+    totalWeight += weight0;
+    if (activePoints == 1) { COMPUTE_COLOR_AND_RETURN; }
 
-        if (abs(weight) <= 0.0001) {
-            color = colors[i];
-            totalWeight = 1.0;
-            break;
-        }
-        weight = 1.0 / weight;
+    float weight1 = computePointWeight(pixelPosition, position1);
+    color += color1 * weight1;
+    totalWeight += weight1;
+    if (activePoints == 2) { COMPUTE_COLOR_AND_RETURN; }
 
-        color += colors[i] * weight;
-        totalWeight += weight;
-    }
+    float weight2 = computePointWeight(pixelPosition, position2);
+    color += color2 * weight2;
+    totalWeight += weight2;
+    if (activePoints == 3) { COMPUTE_COLOR_AND_RETURN; }
 
-    color /= totalWeight;
+    float weight3 = computePointWeight(pixelPosition, position3);
+    color += color3 * weight3;
+    totalWeight += weight3;
+    if (activePoints == 4) { COMPUTE_COLOR_AND_RETURN; }
 
-    fragColor = vec4(color, 1.0);
+    float weight4 = computePointWeight(pixelPosition, position4);
+    color += color4 * weight4;
+    totalWeight += weight4;
+    if (activePoints == 5) { COMPUTE_COLOR_AND_RETURN; }
+
+    float weight5 = computePointWeight(pixelPosition, position5);
+    color += color5 * weight5;
+    totalWeight += weight5;
+
+    COMPUTE_COLOR_AND_RETURN;
 }
