@@ -16,6 +16,13 @@ jobs:
           api-level: 29
           arch: x86_64
           script: ./gradlew connectedCheck
+    
+      - name: Upload Test Reports Folder
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: reports
+          path: image_engine/build/reports/androidTests
 
   report:
     runs-on: ubuntu-latest
