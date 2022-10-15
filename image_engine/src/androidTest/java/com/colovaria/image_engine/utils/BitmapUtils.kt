@@ -2,8 +2,10 @@ package com.colovaria.image_engine.utils
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Base64
 import com.colovaria.graphics.utils.size
 import com.google.common.truth.Truth.assertThat
+import java.io.ByteArrayOutputStream
 import kotlin.math.abs
 
 object BitmapUtils {
@@ -14,14 +16,14 @@ object BitmapUtils {
     /**
      * Like computeBitmapsDiffPercentage, but the second bitmap is asset.
      */
-    private fun compareBitmapToAssert(bitmap: Bitmap, assetPath: String) : Float {
+    fun compareBitmapToAssert(bitmap: Bitmap, assetPath: String) : Float {
         return computeBitmapsDiffPercentage(bitmap, loadBitmapFromAssetPath(assetPath))
     }
 
     /**
      * This function calculate the different in percentages [0..1] between two given bitmaps.
      */
-    private fun computeBitmapsDiffPercentage(bitmapA: Bitmap, bitmapB: Bitmap) : Float {
+    fun computeBitmapsDiffPercentage(bitmapA: Bitmap, bitmapB: Bitmap) : Float {
         if (bitmapA.size() != bitmapB.size()) {
             // Bitmaps in different size, return 100%.
             return 1f
@@ -50,6 +52,12 @@ object BitmapUtils {
         }
         
         return totalDiff.toFloat()
+    }
+
+    fun encodeBitmap(bitmap: Bitmap) : String {
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream)
+        return Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT)
     }
 
     private fun loadBitmapFromAssetPath(assetPath: String) : Bitmap {

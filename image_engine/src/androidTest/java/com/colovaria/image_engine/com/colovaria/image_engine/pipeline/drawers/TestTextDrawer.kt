@@ -38,7 +38,7 @@ class TestTextDrawer : TestClass() {
     }
 
     @Test
-    fun TextureDrawer_DrawSimpleText_ShouldByAsExpected() {
+    fun TextureDrawer_DrawSimpleTextLTRCenter_ShouldByAsExpected() {
         val resultTexture = textDrawer.draw(TextInstruction(
             text = "This is a test",
             size = 0.3f,
@@ -46,14 +46,52 @@ class TestTextDrawer : TestClass() {
             bold = true,
             italic = false,
             font = Font(AssetResourcePath(TEST_FONT_1_PATH)),
-            spacing = 0.01f,
+            spacing = 0.0001f,
             lineSpacing = 0.01f,
-            direction = TextDirection.RTL,
+            direction = TextDirection.LTR,
             alignment = TextAlignment.CENTER,
             maxWidth = 1f
         ), BlenderInstruction())
 
         assertBitmapEqual(resultTexture.save(), "test_results/text_drawer/test_1_result.png")
+    }
+
+    @Test
+    fun TextureDrawer_RTLNormal_ShouldByAsExpected() {
+        val resultTexture = textDrawer.draw(TextInstruction(
+            text = "ThisIsALongTextWithoutSpaces",
+            size = 0.2f,
+            color = GColor(0.4f, 0.6f, 0.1f, 0.9f),
+            bold = false,
+            italic = true,
+            font = Font(AssetResourcePath(TEST_FONT_1_PATH)),
+            spacing = 0.00001f,
+            lineSpacing = 0.005f,
+            direction = TextDirection.RTL,
+            alignment = TextAlignment.NORMAL,
+            maxWidth = 0.8f
+        ), BlenderInstruction())
+
+        assertBitmapEqual(resultTexture.save(), "test_results/text_drawer/test_2_result.png")
+    }
+
+    @Test
+    fun TextureDrawer_DrawRTLText_ShouldByAsExpected() {
+        val resultTexture = textDrawer.draw(TextInstruction(
+            text = "שלום שלום זה טקסט ממש ממש ממש ממש ממש ארוך בשפה מימן לשמאל",
+            size = 0.1f,
+            color = GColor(0.8f, 0.2f, 0.5f, 0.9f),
+            bold = false,
+            italic = false,
+            font = Font(AssetResourcePath(TEST_FONT_2_PATH)),
+            spacing = 0.0001f,
+            lineSpacing = 0.001f,
+            direction = TextDirection.RTL,
+            alignment = TextAlignment.NORMAL,
+            maxWidth = 1f
+        ), BlenderInstruction())
+
+        assertBitmapEqual(resultTexture.save(), "test_results/text_drawer/test_3_result.png")
     }
 
     @After
@@ -64,5 +102,6 @@ class TestTextDrawer : TestClass() {
     companion object {
         private val FAKE_CANVAS_SIZE = Size(512, 512)
         private val TEST_FONT_1_PATH = "font/people_book_font.otf"
+        private val TEST_FONT_2_PATH = "font/OpenSans.ttf"
     }
 }
