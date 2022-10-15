@@ -199,7 +199,7 @@ object GLES {
         GLES20.glGetShaderiv(shader, pname, params, offset)
     }
 
-    fun glGetShaderInfoLog(shader: Int) = wrapWithErrorCheck {
+    fun glGetShaderInfoLog(shader: Int) : String = wrapWithErrorCheck {
         GLES20.glGetShaderInfoLog(shader)
     }
 
