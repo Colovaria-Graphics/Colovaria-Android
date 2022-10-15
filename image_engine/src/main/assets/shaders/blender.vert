@@ -1,15 +1,13 @@
-#version 300 es
-
-in vec2 position;
-in vec2 texturePosition;
+attribute vec2 position;
+attribute vec2 texturePosition;
 
 uniform mat4 model;
 uniform mat4 frontModel;
 uniform mat4 maskModel;
 
-out vec2 backTexturePosition;
-out vec2 frontTexturePosition;
-out vec2 maskTexturePosition;
+varying vec2 backTexturePosition;
+varying vec2 frontTexturePosition;
+varying vec2 maskTexturePosition;
 
 void main() {
     backTexturePosition = texturePosition;

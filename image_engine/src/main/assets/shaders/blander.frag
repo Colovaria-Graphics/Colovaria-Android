@@ -1,5 +1,3 @@
-#version 300 es
-
 precision mediump float;
 
 uniform int blendMode;
@@ -13,11 +11,9 @@ uniform sampler2D backTexture;
 uniform sampler2D frontTexture;
 uniform sampler2D maskTexture;
 
-in vec2 backTexturePosition;
-in vec2 frontTexturePosition;
-in vec2 maskTexturePosition;
-
-out vec4 fragColor;
+varying vec2 backTexturePosition;
+varying vec2 frontTexturePosition;
+varying vec2 maskTexturePosition;
 
 vec4 normalBlend(vec4 colorA, vec4 colorB) {
     return mix(colorA, colorB, colorB.a);
@@ -72,5 +68,5 @@ void main() {
         maskValue = mask(maskTexture, maskTexturePosition, maskOpacity, maskType);
     }
 
-    fragColor = mix(backColor, layerColor, opacity * frontColor.a * maskValue);
+    gl_FragColor = mix(backColor, layerColor, opacity * frontColor.a * maskValue);
 }

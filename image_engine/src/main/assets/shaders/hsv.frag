@@ -1,5 +1,3 @@
-#version 300 es
-
 precision mediump float;
 
 uniform sampler2D backTexture;
@@ -8,9 +6,7 @@ uniform float hueFactor;
 uniform float saturationFactor;
 uniform float valueFactor;
 
-in vec2 backTexturePosition;
-
-out vec4 fragColor;
+varying vec2 backTexturePosition;
 
 vec3 rgb2hsv(vec3 rgb) {
     vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
@@ -37,5 +33,5 @@ void main() {
     hsv.z *= valueFactor;
     hsv = clamp(hsv, vec3(0.0), vec3(1.0));
 
-    fragColor = vec4(hsv2rgb(hsv), color.a);
+    gl_FragColor = vec4(hsv2rgb(hsv), color.a);
 }
