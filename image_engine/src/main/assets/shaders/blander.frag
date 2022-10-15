@@ -49,18 +49,26 @@ vec4 blend(vec4 colorA, vec4 colorB, int blendMode) {
     }
 }
 
+vec4 texture2DClampedToBorder(sampler2D texture, vec2 coords) {
+    if (coords.x < 0.0 || coords.x > 1.0 || coords.y < 0.0 || coords.y > 1.0) {
+        return vec4(0.0);
+    } else {
+        return texture2D(texture, coords);
+    }
+}
+
 float mask(sampler2D maskTexture, vec2 maskTexturePosition, float maskOpacity, int maskType) {
     if (maskType == 0) {
         // Alpah mask.
-        return texture(maskTexture, maskTexturePosition).a * maskOpacity;
+        return texture2DClampedToBorder(maskTexture, maskTexturePosition).a * maskOpacity;
     } else {
         return 1.0;
     }
 }
 
 void main() {
-    vec4 backColor = texture(backTexture, backTexturePosition);
-    vec4 frontColor = texture(frontTexture, frontTexturePosition);
+    vec4 backColor = texture2DClampedToBorder(backTexture, backTexturePosition);
+    vec4 frontColor = texture2DClampedToBorder(frontTexture, frontTexturePosition);
     vec4 layerColor = blend(backColor, frontColor, blendMode);
 
     float maskValue = 1.0;
