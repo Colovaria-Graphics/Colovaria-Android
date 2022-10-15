@@ -1,4 +1,4 @@
-package com.colovaria.image_engine.com.colovaria.image_engine.pipeline.drawers
+package com.colovaria.image_engine.pipeline.drawers
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.colovaria.geometry.Size
@@ -10,7 +10,6 @@ import com.colovaria.graphics.uniforms.GColor
 import com.colovaria.image_engine.api.blend.BlenderInstruction
 import com.colovaria.image_engine.api.texture.CircleInstruction
 import com.colovaria.image_engine.api.texture.RectInstruction
-import com.colovaria.image_engine.pipeline.drawers.ShapeDrawer
 import com.colovaria.image_engine.utils.BitmapUtils
 import com.colovaria.image_engine.utils.TestClass
 import org.junit.After

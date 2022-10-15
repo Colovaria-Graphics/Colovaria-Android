@@ -1,4 +1,4 @@
-package com.colovaria.image_engine.com.colovaria.image_engine.pipeline.drawers
+package com.colovaria.image_engine.pipeline.drawers
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.colovaria.geometry.Size
@@ -12,7 +12,6 @@ import com.colovaria.image_engine.api.text.Font
 import com.colovaria.image_engine.api.text.TextAlignment
 import com.colovaria.image_engine.api.text.TextDirection
 import com.colovaria.image_engine.api.texture.TextInstruction
-import com.colovaria.image_engine.pipeline.drawers.TextDrawer
 import com.colovaria.image_engine.text.FontProvider
 import com.colovaria.image_engine.text.TextMeasurer
 import com.colovaria.image_engine.utils.BitmapUtils.assertBitmapEqual

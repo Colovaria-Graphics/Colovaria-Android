@@ -1,4 +1,4 @@
-package com.colovaria.image_engine.com.colovaria.image_engine.pipeline.drawers
+package com.colovaria.image_engine.pipeline.drawers
 
 import android.graphics.Bitmap
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -13,7 +13,6 @@ import com.colovaria.image_engine.api.resources.AssetResourcePath
 import com.colovaria.image_engine.api.resources.ImageLoader
 import com.colovaria.image_engine.api.resources.ResourcePath
 import com.colovaria.image_engine.api.texture.ImageInstruction
-import com.colovaria.image_engine.pipeline.drawers.ImageDrawer
 import com.colovaria.image_engine.utils.BitmapUtils
 import com.colovaria.image_engine.utils.TestClass
 import org.junit.After
