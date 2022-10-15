@@ -60,7 +60,7 @@ object BitmapUtils {
         return Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT)
     }
 
-    private fun loadBitmapFromAssetPath(assetPath: String) : Bitmap {
+    fun loadBitmapFromAssetPath(assetPath: String) : Bitmap {
         return TestClass().context.assets.open(assetPath).use(BitmapFactory::decodeStream)
     }
 }
