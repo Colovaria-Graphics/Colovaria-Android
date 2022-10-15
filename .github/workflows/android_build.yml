@@ -7,33 +7,26 @@ on:
     branches: [ "main" ]
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - uses: ./.github/actions/setup_jdk
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
-
   lint:
     runs-on: ubuntu-latest
-    needs: setup
     steps:
-      - name: Run lint
-        run: ./gradlew lint
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup_jdk
+      - uses: android-actions/setup-android@v2
+    
+      - run: ./gradlew lint
       
-      - name: Report
-        uses: yutailang0119/action-android-lint@v3.1.0
+      - uses: yutailang0119/action-android-lint@v3.1.0
         if: always()
         with:
           report-path: ./*/build/reports/*.xml
       
   build:
     runs-on: ubuntu-latest
-    needs: setup
     steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup_jdk
+      - uses: android-actions/setup-android@v2
+    
       - name: Run Buid
         run: ./gradlew build -x test
