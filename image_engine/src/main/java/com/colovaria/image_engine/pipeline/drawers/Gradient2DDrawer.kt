@@ -5,12 +5,13 @@ import android.opengl.GLES32
 import com.colovaria.geometry.Size
 import com.colovaria.graphics.*
 import com.colovaria.graphics.uniforms.GInt
-import com.colovaria.graphics.uniforms.GVec2FArray
-import com.colovaria.graphics.uniforms.GVec3FArray
+import com.colovaria.graphics.uniforms.GVector2F
+import com.colovaria.graphics.uniforms.GVector3F
 import com.colovaria.image_engine.api.blend.BlenderInstruction
 import com.colovaria.image_engine.api.texture.Gradient2DInstruction
 import com.colovaria.image_engine.pipeline.drawers.base.CachedTextureDrawer
 import com.colovaria.image_engine.utils.GenericBuffers
+import java.lang.Integer.min
 
 class Gradient2DDrawer(
     context: Context,
@@ -30,15 +31,20 @@ class Gradient2DDrawer(
     private val fbo = GFrameBuffer(size)
 
     override fun drawInternal(instruction: Gradient2DInstruction, blending: BlenderInstruction): GTexture {
-        assert(instruction.colors.size == instruction.colors.size)
-        assert(instruction.colors.size <= MAX_ACTIVE_DOTS)
+        assert(instruction.colors.isNotEmpty() && instruction.colors.size <= MAX_ACTIVE_DOTS)
+
+        val uniforms = mutableMapOf<String, GUniform>()
+        val entries = instruction.colors.entries.toList()
+        for (i in 0 until MAX_ACTIVE_DOTS) {
+            val colorIndex = min(instruction.colors.size - 1, i)
+            uniforms["color$i"] = GVector3F(entries[colorIndex].value.asVec3())
+            uniforms["position$i"] = GVector2F(entries[colorIndex].key)
+        }
+
+        uniforms["activePoints"] = GInt(instruction.colors.size)
 
         fbo.withBind {
-            gradientDrawer.draw(GLES32.GL_TRIANGLE_STRIP, mapOf(
-                "colors" to GVec3FArray(instruction.colors.map { it.value.asVec3() }),
-                "positions" to GVec2FArray(instruction.colors.map { it.key }),
-                "activeDots" to GInt(instruction.colors.size),
-            ), mapOf())
+            gradientDrawer.draw(GLES32.GL_TRIANGLE_STRIP, uniforms, mapOf())
         }
 
         return fbo.cloneTexture()
