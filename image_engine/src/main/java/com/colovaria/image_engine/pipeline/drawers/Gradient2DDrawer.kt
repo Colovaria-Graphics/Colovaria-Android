@@ -20,12 +20,9 @@ class Gradient2DDrawer(
     private val gradientSoftware =
         GSoftware(context, "shaders/gradient2d.vert", "shaders/gradient2d.frag")
 
-    // TODO: why not to use single struct and convert to the other in the vertex shader.
     private val gradientDrawer = GDynamicDrawer.create(gradientSoftware,
         GPUStruct("position", GenericBuffers.TRIANGLE_STRIP_2D_FULL_SIZE,
             2, GenericBuffers.TRIANGLE_STRIP_2D_FULL),
-        GPUStruct("texturePosition", GenericBuffers.TRIANGLE_STRIP_2D_TEXTURE_SIZE,
-            2, GenericBuffers.TRIANGLE_STRIP_2D_TEXTURE)
     )
 
     private val fbo = GFrameBuffer(size)
