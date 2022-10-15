@@ -22,7 +22,7 @@ class Gradient2DDrawer(
 
     private val gradientDrawer = GDynamicDrawer.create(gradientSoftware,
         GPUStruct("position", GenericBuffers.TRIANGLE_STRIP_2D_FULL_SIZE,
-            2, GenericBuffers.TRIANGLE_STRIP_2D_FULL),
+            2, GenericBuffers.TRIANGLE_STRIP_2D_FULL)
     )
 
     private val fbo = GFrameBuffer(size)
