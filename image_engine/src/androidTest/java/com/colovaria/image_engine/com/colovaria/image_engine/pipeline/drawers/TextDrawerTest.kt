@@ -24,7 +24,7 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-class TestTextDrawer : TestClass() {
+class TextDrawerTest : TestClass() {
     private val fontProvider by lazy { FontProvider(context) }
     private val textMeasurer by lazy { TextMeasurer(fontProvider) }
     private val textDrawer by lazy { TextDrawer(textMeasurer, fontProvider, FAKE_CANVAS_SIZE) }
@@ -38,7 +38,7 @@ class TestTextDrawer : TestClass() {
     }
 
     @Test
-    fun TextureDrawer_DrawSimpleTextLTRCenter_ShouldByAsExpected() {
+    fun TextDrawer_DrawSimpleTextLTRCenter_ShouldByAsExpected() {
         val resultTexture = textDrawer.draw(TextInstruction(
             text = "This is a test",
             size = 0.3f,
@@ -57,7 +57,7 @@ class TestTextDrawer : TestClass() {
     }
 
     @Test
-    fun TextureDrawer_RTLNormal_ShouldByAsExpected() {
+    fun TextDrawer_RTLNormal_ShouldByAsExpected() {
         val resultTexture = textDrawer.draw(TextInstruction(
             text = "ThisIsALongTextWithoutSpaces",
             size = 0.2f,
@@ -76,7 +76,7 @@ class TestTextDrawer : TestClass() {
     }
 
     @Test
-    fun TextureDrawer_DrawRTLText_ShouldByAsExpected() {
+    fun TextDrawer_DrawRTLText_ShouldByAsExpected() {
         val resultTexture = textDrawer.draw(TextInstruction(
             text = "שלום שלום זה טקסט ממש ממש ממש ממש ממש ארוך בשפה מימן לשמאל",
             size = 0.1f,
