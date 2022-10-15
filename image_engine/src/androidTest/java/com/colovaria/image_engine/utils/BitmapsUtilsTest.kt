@@ -3,9 +3,12 @@ package com.colovaria.image_engine.utils
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class BitmapsUtilsTest: TestClass() {
     @Test
     fun TestComputeBitmapsDiffPercentage_TwoBlacksBitmaps_DiffShouldBe0() {
