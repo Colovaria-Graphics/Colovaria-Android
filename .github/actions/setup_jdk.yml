@@ -1,0 +1,9 @@
+name: "Setup JDK"
+description: "Download and install JDK"
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-java@v3
+      with:
+        distribution: 'corretto'
+        java-version: '11'
