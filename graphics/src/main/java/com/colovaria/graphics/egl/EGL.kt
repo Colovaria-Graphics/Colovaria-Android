@@ -30,7 +30,7 @@ object EGL {
             configs, configsOffset, config_size, num_config, num_configOffset)
     }
 
-    fun eglGetDisplay(display_id: Int) = wrapWithErrorCheck {
+    fun eglGetDisplay(display_id: Int) : EGLDisplay = wrapWithErrorCheck {
         return@wrapWithErrorCheck EGL14.eglGetDisplay(display_id)
     }
 
@@ -58,7 +58,7 @@ object EGL {
         share_context: EGLContext,
         attrib_list: IntArray,
         offset: Int
-    ) = wrapWithErrorCheck {
+    ) : EGLContext = wrapWithErrorCheck {
         return@wrapWithErrorCheck EGL14.eglCreateContext(dpy, config, share_context, attrib_list, offset)
     }
 
@@ -81,7 +81,7 @@ object EGL {
         config: EGLConfig,
         attrib_list: IntArray,
         offset: Int
-    ) = wrapWithErrorCheck {
+    ) : EGLSurface = wrapWithErrorCheck {
         return@wrapWithErrorCheck EGL14.eglCreatePbufferSurface(dpy, config, attrib_list, offset)
     }
 
@@ -91,7 +91,7 @@ object EGL {
         win: Any,
         attrib_list: IntArray,
         offset: Int
-    ) = wrapWithErrorCheck {
+    ) : EGLSurface = wrapWithErrorCheck {
         return@wrapWithErrorCheck EGL14.eglCreateWindowSurface(dpy, config, win, attrib_list, offset)
     }
 
