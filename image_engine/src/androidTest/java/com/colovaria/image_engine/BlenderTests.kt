@@ -13,6 +13,7 @@ import com.colovaria.graphics.uniforms.GColor
 import com.colovaria.graphics.withBind
 import com.colovaria.image_engine.api.blend.BlendMode
 import com.colovaria.image_engine.api.blend.BlenderInstruction
+import com.colovaria.image_engine.api.mask.MaskType
 import com.colovaria.image_engine.api.texture.CircleInstruction
 import com.colovaria.image_engine.api.texture.RectInstruction
 import com.colovaria.image_engine.pipeline.drawers.ShapeDrawer
@@ -117,6 +118,27 @@ class BlenderTests : TestClass() {
         }
 
         BitmapUtils.assertBitmapEqual(frameBuffer.save(), "test_results/blender/test_5_result.png")
+    }
+
+    @Test
+    fun Blender_DrawCircleOverRectWithMask_ShouldByAsExpected() {
+        val backTexture = generateRectTexture(SizeF(1f, 1f), GColor.GREEN)
+        val frontTexture = generateCircleTexture(SizeF(0.5f, 0.5f), GColor.RED)
+        val maskTexture = generateRectTexture(SizeF(1.0f, 0.3f), GColor.WHITE)
+
+        val frameBuffer = GFrameBuffer(FAKE_CANVAS_SIZE)
+        frameBuffer.withBind {
+            blender.blend(
+                backTexture,
+                frontTexture,
+                BlenderInstruction(adjustMode = AdjustMode.ORIGINAL),
+                maskTexture = maskTexture,
+                maskBlending = BlenderInstruction(adjustMode = AdjustMode.ORIGINAL),
+                maskType = MaskType.ALPHA
+            )
+        }
+
+        BitmapUtils.assertBitmapEqual(frameBuffer.save(), "test_results/blender/test_6_result.png")
     }
 
     @After
