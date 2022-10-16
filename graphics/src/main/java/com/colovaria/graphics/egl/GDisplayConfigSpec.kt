@@ -1,9 +1,8 @@
-package com.colovaria.graphics
+package com.colovaria.graphics.egl
 
 import android.opengl.EGL14
 import android.opengl.EGLConfig
 import android.opengl.EGLDisplay
-import com.colovaria.graphics.egl.GEGLUtils
 
 /**
  * This data-class represent all the possible specs of a egl display.
@@ -40,7 +39,7 @@ data class GDisplayConfigSpec(
         val tempArray = IntArray(1)
 
         fun findAttribute(attribute: Int) : Int {
-            return GEGLUtils.findConfigAttrib(display, eglConfig, attribute, tempArray=tempArray)
+            return GUtils.findConfigAttrib(display, eglConfig, attribute, tempArray=tempArray)
         }
 
         val displayColorAttribute = arrayOf(
