@@ -50,7 +50,6 @@ class GSurface private constructor(
                 intArrayOf(EGL14.EGL_NONE),
                 0
             )
-            assert(eglSurface != null)
             assert(eglSurface.nativeHandle != EGL14.EGL_BAD_SURFACE.toLong())
             return GSurface(display, eglSurface)
         }
@@ -61,7 +60,6 @@ class GSurface private constructor(
                 surface,
                 intArrayOf(EGL14.EGL_NONE),
                 0)
-            assert(eglSurface != null)
             assert(eglSurface.nativeHandle != EGL14.EGL_BAD_SURFACE.toLong())
             return GSurface(display, eglSurface)
         }
