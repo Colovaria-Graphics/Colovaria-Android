@@ -20,6 +20,8 @@ jobs:
         with:
           api-level: 29
           arch: x86_64
+          ram-size: 4096M
+          heap-size: 2048M
           script: ./gradlew connectedAndroidTest
     
       - name: Upload Test Reports Folder
