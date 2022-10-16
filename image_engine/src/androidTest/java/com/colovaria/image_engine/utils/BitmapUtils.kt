@@ -36,6 +36,9 @@ object BitmapUtils {
         bitmapA.getPixels(bufferA, 0, bitmapA.width, 0, 0, bitmapA.width, bitmapA.height)
         bitmapB.getPixels(bufferB, 0, bitmapB.width, 0, 0, bitmapB.width, bitmapB.height)
 
+        bitmapA.recycle()
+        bitmapB.recycle()
+
         var totalDiff = 0.0
         val pixelWeight = 1.0 / bufferA.size
         val colorWeight = pixelWeight / (4.0 * 255)
