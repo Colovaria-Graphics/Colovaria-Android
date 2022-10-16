@@ -5,7 +5,7 @@ import com.colovaria.graphics.gles.GTexture
 import com.colovaria.image_engine.api.texture.base.ProcessorInstruction
 import kotlin.reflect.KClass
 
-class CompositeTextureProcessor(val size: Size) : TextureManagedProcessor<ProcessorInstruction>() {
+class CompositeTextureProcessor(val size: Size) : TextureProcessor<ProcessorInstruction> {
     private val processors = mutableMapOf<KClass<out ProcessorInstruction>, TextureProcessor<in ProcessorInstruction>>()
 
     fun <I: ProcessorInstruction, D : TextureProcessor<I>> attachProcessor(instructionClass: KClass<I>, textureProcessor: D) {
@@ -27,23 +27,20 @@ class CompositeTextureProcessor(val size: Size) : TextureManagedProcessor<Proces
         return processors.containsKey(instructionClass)
     }
 
-    override fun preFrameDraw() {
-        super.preFrameDraw()
-        processors.values.forEach { it.preFrameDraw() }
-    }
-
-    override fun processInternal(instruction: ProcessorInstruction, texture: GTexture): GTexture {
+    override fun process(instruction: ProcessorInstruction, texture: GTexture): GTexture {
         return processors[instruction::class]?.process(instruction, texture)
             ?: error("No matching drawer for $instruction")
     }
 
+    override fun preFrameDraw() {
+        processors.values.forEach { it.preFrameDraw() }
+    }
+
     override fun postFrameDraw() {
-        super.postFrameDraw()
         processors.values.forEach { it.postFrameDraw() }
     }
 
     override fun dispose() {
-        super.dispose()
         processors.values.forEach { it.dispose() }
     }
 }
