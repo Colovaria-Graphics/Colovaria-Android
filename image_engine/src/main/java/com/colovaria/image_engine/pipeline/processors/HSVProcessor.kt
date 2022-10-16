@@ -3,8 +3,8 @@ package com.colovaria.image_engine.pipeline.processors
 import android.content.Context
 import android.opengl.GLES32
 import com.colovaria.geometry.Size
-import com.colovaria.graphics.*
-import com.colovaria.graphics.uniforms.GFloat
+import com.colovaria.graphics.gles.*
+import com.colovaria.graphics.gles.uniforms.GFloat
 import com.colovaria.image_engine.api.texture.HSVInstruction
 import com.colovaria.image_engine.pipeline.processors.base.TextureManagedProcessor
 import com.colovaria.image_engine.utils.GenericBuffers

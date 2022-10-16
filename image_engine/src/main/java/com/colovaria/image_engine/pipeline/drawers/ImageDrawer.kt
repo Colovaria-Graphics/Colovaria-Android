@@ -2,7 +2,7 @@ package com.colovaria.image_engine.pipeline.drawers
 
 import com.colovaria.geometry.Size
 import com.colovaria.geometry.SizeF
-import com.colovaria.graphics.GTexture
+import com.colovaria.graphics.gles.GTexture
 import com.colovaria.image_engine.api.blend.BlenderInstruction
 import com.colovaria.image_engine.api.resources.ImageLoader
 import com.colovaria.image_engine.api.texture.ImageInstruction

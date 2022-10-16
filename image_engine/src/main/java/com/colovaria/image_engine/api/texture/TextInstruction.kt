@@ -1,6 +1,6 @@
 package com.colovaria.image_engine.api.texture
 
-import com.colovaria.graphics.uniforms.GColor
+import com.colovaria.graphics.gles.uniforms.GColor
 import com.colovaria.image_engine.api.text.Font
 import com.colovaria.image_engine.api.text.TextAlignment
 import com.colovaria.image_engine.api.text.TextDirection

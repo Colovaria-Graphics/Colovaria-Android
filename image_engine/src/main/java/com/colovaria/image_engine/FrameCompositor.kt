@@ -2,10 +2,9 @@ package com.colovaria.image_engine
 
 import android.content.Context
 import com.colovaria.geometry.Size
-import com.colovaria.graphics.GFrameBuffer
-import com.colovaria.graphics.GTexture
-import com.colovaria.graphics.GUtils
-import com.colovaria.graphics.withBind
+import com.colovaria.graphics.gles.GFrameBuffer
+import com.colovaria.graphics.gles.GLESUtils
+import com.colovaria.graphics.gles.GTexture
 import com.colovaria.image_engine.api.Frame
 import com.colovaria.image_engine.api.Layer
 import com.colovaria.image_engine.api.blend.BlenderInstruction
@@ -58,7 +57,7 @@ class FrameCompositor(
     }
 
     init {
-        GUtils.setViewportSize(size)
+        GLESUtils.setViewportSize(size)
     }
 
     fun render(frame: Frame, renderToSurface: Boolean = true) {
@@ -84,9 +83,9 @@ class FrameCompositor(
     @Suppress("ProtectedInFinal")
     protected fun renderInternal(frame: Frame, renderToSurface: Boolean) : Unit = frameBufferPool.withMany(PASS_FBO_NUM) { passFrameBuffers ->
         if (frame.layers.isEmpty()) {
-            GUtils.clear(frame.backgroundColor)
+            GLESUtils.clear(frame.backgroundColor)
         } else {
-            passFrameBuffers[0].withBind { GUtils.clear(frame.backgroundColor) }
+            passFrameBuffers[0].withBind { GLESUtils.clear(frame.backgroundColor) }
         }
 
         frame.layers.forEachIndexed { index, layer ->
@@ -100,7 +99,7 @@ class FrameCompositor(
             }
 
             val bindReference = if (!isLastPass) currentFrameBuffer.bind() else null
-            GUtils.clear()
+            GLESUtils.clear()
 
             blender.blend(
                 lastFrameBuffer.texture!!,

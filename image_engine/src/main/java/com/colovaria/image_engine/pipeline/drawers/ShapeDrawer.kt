@@ -5,8 +5,8 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import com.colovaria.geometry.Size
-import com.colovaria.graphics.GTexture
-import com.colovaria.graphics.uniforms.GColor
+import com.colovaria.graphics.gles.GTexture
+import com.colovaria.graphics.gles.uniforms.GColor
 import com.colovaria.image_engine.api.blend.BlenderInstruction
 import com.colovaria.image_engine.api.texture.CircleInstruction
 import com.colovaria.image_engine.api.texture.RectInstruction

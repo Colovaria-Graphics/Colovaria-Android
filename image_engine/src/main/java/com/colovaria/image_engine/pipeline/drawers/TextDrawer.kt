@@ -4,7 +4,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Rect
 import com.colovaria.geometry.Size
-import com.colovaria.graphics.GTexture
+import com.colovaria.graphics.gles.GTexture
 import com.colovaria.image_engine.api.blend.BlenderInstruction
 import com.colovaria.image_engine.api.text.TextAlignment
 import com.colovaria.image_engine.api.text.TextDirection

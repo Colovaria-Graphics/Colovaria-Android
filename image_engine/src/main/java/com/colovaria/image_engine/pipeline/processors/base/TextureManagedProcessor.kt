@@ -1,7 +1,7 @@
 package com.colovaria.image_engine.pipeline.processors.base
 
 import androidx.annotation.CallSuper
-import com.colovaria.graphics.GTexture
+import com.colovaria.graphics.gles.GTexture
 import com.colovaria.image_engine.api.texture.base.ProcessorInstruction
 
 abstract class TextureManagedProcessor<InstructionType : ProcessorInstruction> :

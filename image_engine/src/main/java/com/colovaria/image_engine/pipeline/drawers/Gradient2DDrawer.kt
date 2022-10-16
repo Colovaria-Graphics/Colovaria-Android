@@ -3,10 +3,10 @@ package com.colovaria.image_engine.pipeline.drawers
 import android.content.Context
 import android.opengl.GLES32
 import com.colovaria.geometry.Size
-import com.colovaria.graphics.*
-import com.colovaria.graphics.uniforms.GInt
-import com.colovaria.graphics.uniforms.GVector2F
-import com.colovaria.graphics.uniforms.GVector3F
+import com.colovaria.graphics.gles.*
+import com.colovaria.graphics.gles.uniforms.GInt
+import com.colovaria.graphics.gles.uniforms.GVector2F
+import com.colovaria.graphics.gles.uniforms.GVector3F
 import com.colovaria.image_engine.api.blend.BlenderInstruction
 import com.colovaria.image_engine.api.texture.Gradient2DInstruction
 import com.colovaria.image_engine.pipeline.drawers.base.CachedTextureDrawer

@@ -7,7 +7,7 @@ import android.os.HandlerThread
 import android.os.SystemClock
 import android.view.Surface
 import com.colovaria.geometry.Size
-import com.colovaria.graphics.BindReference
+import com.colovaria.graphics.base.BindReference
 import com.colovaria.graphics.egl.GContext
 import com.colovaria.graphics.egl.GDisplay
 import com.colovaria.graphics.egl.GSurface
