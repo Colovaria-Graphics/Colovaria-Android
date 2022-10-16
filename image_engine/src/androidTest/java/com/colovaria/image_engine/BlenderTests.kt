@@ -159,6 +159,23 @@ class BlenderTests : TestClass() {
         BitmapUtils.assertBitmapEqual(frameBuffer.save(), "test_results/blender/test_7_result.png")
     }
 
+    @Test
+    fun Blender_DrawCircleOverRectWithOpacity_ShouldByAsExpected() {
+        val backTexture = generateRectTexture(SizeF(1f, 1f), GColor.GREEN)
+        val frontTexture = generateCircleTexture(SizeF(0.5f, 0.5f), GColor.RED)
+
+        val frameBuffer = GFrameBuffer(FAKE_CANVAS_SIZE)
+        frameBuffer.withBind {
+            blender.blend(
+                backTexture,
+                frontTexture,
+                BlenderInstruction(adjustMode = AdjustMode.ORIGINAL, opacity = 0.5f),
+            )
+        }
+
+        BitmapUtils.assertBitmapEqual(frameBuffer.save(), "test_results/blender/test_8_result.png")
+    }
+
     @After
     fun cleanup() {
         blender.dispose()
