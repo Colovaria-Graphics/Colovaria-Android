@@ -25,7 +25,7 @@ vec3 hsv2rgb(vec3 hsv) {
 }
 
 void main() {
-    vec4 color = texture(backTexture, backTexturePosition);
+    vec4 color = texture2D(backTexture, backTexturePosition);
 
     vec3 hsv = rgb2hsv(color.xyz);
     hsv.x *= hueFactor;
