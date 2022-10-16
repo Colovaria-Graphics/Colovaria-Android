@@ -5,7 +5,7 @@ import com.colovaria.geometry.Size
 import com.colovaria.graphics.egl.GContext
 import com.colovaria.graphics.egl.GDisplay
 import com.colovaria.graphics.egl.GSurface
-import com.colovaria.graphics.uniforms.GColor
+import com.colovaria.graphics.gles.uniforms.GColor
 import com.colovaria.image_engine.api.blend.BlenderInstruction
 import com.colovaria.image_engine.api.resources.AssetResourcePath
 import com.colovaria.image_engine.api.text.Font

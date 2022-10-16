@@ -3,7 +3,7 @@ package com.colovaria.image_engine.utils
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
-import com.colovaria.graphics.utils.size
+import com.colovaria.graphics.size
 import com.google.common.truth.Truth.assertThat
 import java.io.ByteArrayOutputStream
 import kotlin.math.abs

@@ -6,7 +6,7 @@ import com.colovaria.geometry.SizeF
 import com.colovaria.graphics.egl.GContext
 import com.colovaria.graphics.egl.GDisplay
 import com.colovaria.graphics.egl.GSurface
-import com.colovaria.graphics.uniforms.GColor
+import com.colovaria.graphics.gles.uniforms.GColor
 import com.colovaria.image_engine.api.blend.BlenderInstruction
 import com.colovaria.image_engine.api.texture.CircleInstruction
 import com.colovaria.image_engine.api.texture.RectInstruction

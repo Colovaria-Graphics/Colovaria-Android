@@ -4,13 +4,12 @@ import com.colovaria.geometry.AdjustMode
 import com.colovaria.geometry.Size
 import com.colovaria.geometry.SizeF
 import com.colovaria.geometry.Vector2F
-import com.colovaria.graphics.GFrameBuffer
-import com.colovaria.graphics.GTexture
 import com.colovaria.graphics.egl.GContext
 import com.colovaria.graphics.egl.GDisplay
 import com.colovaria.graphics.egl.GSurface
-import com.colovaria.graphics.uniforms.GColor
-import com.colovaria.graphics.withBind
+import com.colovaria.graphics.gles.GFrameBuffer
+import com.colovaria.graphics.gles.GTexture
+import com.colovaria.graphics.gles.uniforms.GColor
 import com.colovaria.image_engine.api.blend.BlendMode
 import com.colovaria.image_engine.api.blend.BlenderInstruction
 import com.colovaria.image_engine.api.mask.MaskType
