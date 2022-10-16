@@ -1,4 +1,4 @@
-package com.colovaria.graphics
+package com.colovaria.graphics.base
 
 /**
  * This class represent a bind relation that could be unbind.

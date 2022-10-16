@@ -1,4 +1,4 @@
-package com.colovaria.graphics
+package com.colovaria.graphics.base
 
 abstract class GObject {
     @Volatile
