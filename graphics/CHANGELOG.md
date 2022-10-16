@@ -13,3 +13,10 @@ Version 1.0.4 *(2022-10-16)*
 * Many bug fixes.
 * Code reordering.
 * GLES 2.0 Support.
+
+
+Version 1.0.5 *(2022-10-16)*
+----------------------------
+
+* AAR Compile bug fix.
+
