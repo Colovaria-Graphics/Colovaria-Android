@@ -16,3 +16,10 @@ Version 1.0.2 *(2022-10-16)*
 * Added documentation.
 * Support custom texture instructions, drawers and processors.
 * Blender, Drawers and Processors are now well CI-CD tested.
+
+
+Version 1.0.3 *(2022-10-16)*
+----------------------------
+
+* AAR Compile bug fix.
+
