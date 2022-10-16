@@ -1,6 +1,7 @@
-package com.colovaria.graphics
+package com.colovaria.graphics.gles
 
 import android.content.Context
+import com.colovaria.graphics.base.GObject
 
 class GSoftware : GObject {
     val shaders: List<GShader>

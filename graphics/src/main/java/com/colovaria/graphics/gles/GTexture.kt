@@ -1,14 +1,15 @@
-package com.colovaria.graphics
+package com.colovaria.graphics.gles
 
 import android.graphics.Bitmap
 import android.opengl.GLES20
 import android.opengl.GLES32
 import com.colovaria.geometry.RectF
 import com.colovaria.geometry.Size
-import com.colovaria.graphics.uniforms.GColor
-import com.colovaria.graphics.utils.rect
-import com.colovaria.graphics.utils.size
-import com.colovaria.graphics.wrappers.GLES
+import com.colovaria.graphics.base.BindReference
+import com.colovaria.graphics.base.GBindableHandle
+import com.colovaria.graphics.gles.uniforms.GColor
+import com.colovaria.graphics.rect
+import com.colovaria.graphics.size
 
 class GTexture : GHandle, GUniform, GBindableHandle {
     val size: Size

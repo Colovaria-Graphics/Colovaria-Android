@@ -1,8 +1,7 @@
-package com.colovaria.graphics
+package com.colovaria.graphics.gles
 
 import android.content.Context
 import android.opengl.GLES20
-import com.colovaria.graphics.wrappers.GLES
 
 class GShader : GHandle {
     constructor(type: Int) : super(GLES.glCreateShader(type))
@@ -11,7 +10,7 @@ class GShader : GHandle {
         attachCodeToShader(code)
     }
 
-    constructor(context: Context, filename: String) : this(GUtils.filenameToShaderType(filename)) {
+    constructor(context: Context, filename: String) : this(GLESUtils.filenameToShaderType(filename)) {
         attachCodeToShader(context.assets.open(filename).bufferedReader().use { it.readText() })
     }
 

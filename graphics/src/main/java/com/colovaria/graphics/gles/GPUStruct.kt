@@ -1,4 +1,4 @@
-package com.colovaria.graphics
+package com.colovaria.graphics.gles
 
 import java.nio.Buffer
 

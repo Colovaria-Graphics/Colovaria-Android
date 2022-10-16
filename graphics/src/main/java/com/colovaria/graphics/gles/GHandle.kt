@@ -1,6 +1,7 @@
-package com.colovaria.graphics
+package com.colovaria.graphics.gles
 
 import android.opengl.GLES20
+import com.colovaria.graphics.base.GObject
 
 abstract class GHandle(val handle: Int) : GObject() {
     init {

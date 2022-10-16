@@ -1,10 +1,10 @@
-package com.colovaria.graphics.uniforms
+package com.colovaria.graphics.gles.uniforms
 
 import android.graphics.Color
 import com.colovaria.geometry.Vector3F
 import com.colovaria.geometry.Vector4F
-import com.colovaria.graphics.GUniform
-import com.colovaria.graphics.wrappers.GLES
+import com.colovaria.graphics.gles.GLES
+import com.colovaria.graphics.gles.GUniform
 
 data class GColor(
     val red: Float,

@@ -1,4 +1,4 @@
-package com.colovaria.graphics.wrappers
+package com.colovaria.graphics.gles
 
 import android.graphics.Bitmap
 import android.opengl.GLES20
@@ -6,7 +6,6 @@ import android.opengl.GLES30
 import android.opengl.GLES32
 import android.opengl.GLUtils
 import com.colovaria.geometry.Size
-import com.colovaria.graphics.GException
 import java.nio.Buffer
 
 object GLES {
@@ -317,7 +316,7 @@ object GLES {
         val result = func()
         val errorCode = GLES20.glGetError()
         if (errorCode != GLES20.GL_NO_ERROR) {
-            throw GException(errorCode)
+            throw GLESException(errorCode)
         }
         return result
     }

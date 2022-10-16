@@ -1,7 +1,6 @@
-package com.colovaria.graphics
+package com.colovaria.graphics.gles
 
 import android.opengl.GLES20
-import com.colovaria.graphics.wrappers.GLES
 
 class GProgram : GHandle {
     constructor() : super(GLES.glCreateProgram())

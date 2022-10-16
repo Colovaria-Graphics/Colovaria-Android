@@ -1,4 +1,4 @@
-package com.colovaria.graphics.utils
+package com.colovaria.graphics
 
 import android.graphics.Bitmap
 import com.colovaria.geometry.Rect

@@ -1,7 +1,8 @@
-package com.colovaria.graphics
+package com.colovaria.graphics.gles
 
 import android.opengl.GLES20
-import com.colovaria.graphics.wrappers.GLES
+import com.colovaria.graphics.base.BindReference
+import com.colovaria.graphics.base.GBindableHandle
 import java.nio.*
 
 class GVertexBuffer : GHandle, GBindableHandle {

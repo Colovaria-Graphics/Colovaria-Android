@@ -1,6 +1,6 @@
-package com.colovaria.graphics
+package com.colovaria.graphics.gles
 
-data class GException(
+data class GLESException(
     val glCode: Int
 ) : Exception("OpenGLES Exception ${exceptionIntToCode(glCode)}") {
     companion object {

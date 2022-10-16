@@ -1,13 +1,12 @@
-package com.colovaria.graphics
+package com.colovaria.graphics.gles
 
 import android.opengl.GLES20
 import android.opengl.GLES31
 import android.opengl.GLES32
 import com.colovaria.geometry.Size
-import com.colovaria.graphics.uniforms.GColor
-import com.colovaria.graphics.wrappers.GLES
+import com.colovaria.graphics.gles.uniforms.GColor
 
-object GUtils {
+object GLESUtils {
     fun clear(color: GColor = GColor.TRANSPARENT) {
         GLES.glClearColor(color.red, color.green, color.blue, color.alpha)
         GLES.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)

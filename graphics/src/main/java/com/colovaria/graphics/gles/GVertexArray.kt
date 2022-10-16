@@ -1,6 +1,7 @@
-package com.colovaria.graphics
+package com.colovaria.graphics.gles
 
-import com.colovaria.graphics.wrappers.GLES
+import com.colovaria.graphics.base.BindReference
+import com.colovaria.graphics.base.GBindableHandle
 
 class GVertexArray : GHandle(GLES.glGenVertexArray()), GBindableHandle {
     override fun bind() : BindReference {
