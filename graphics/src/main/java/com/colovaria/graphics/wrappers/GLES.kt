@@ -6,6 +6,7 @@ import android.opengl.GLES30
 import android.opengl.GLES32
 import android.opengl.GLUtils
 import com.colovaria.geometry.Size
+import com.colovaria.graphics.GException
 import java.nio.Buffer
 
 object GLES {
@@ -315,7 +316,9 @@ object GLES {
     private inline fun <R> wrapWithErrorCheck(func: () -> R) : R {
         val result = func()
         val errorCode = GLES20.glGetError()
-        assert(errorCode == GLES20.GL_NO_ERROR) { "glError: 0x${errorCode.toString(16)}" }
+        if (errorCode != GLES20.GL_NO_ERROR) {
+            throw GException(errorCode)
+        }
         return result
     }
 }
