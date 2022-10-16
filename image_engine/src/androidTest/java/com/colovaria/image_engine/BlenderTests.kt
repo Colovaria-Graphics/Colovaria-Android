@@ -141,6 +141,24 @@ class BlenderTests : TestClass() {
         BitmapUtils.assertBitmapEqual(frameBuffer.save(), "test_results/blender/test_6_result.png")
     }
 
+    @Test
+    fun Blender_DrawCircleOverRectFlipX_ShouldByAsExpected() {
+        val backTexture = generateRectTexture(SizeF(1f, 1f), GColor.GREEN)
+        val frontTexture = generateCircleTexture(SizeF(0.5f, 0.5f), GColor.RED)
+
+        val frameBuffer = GFrameBuffer(FAKE_CANVAS_SIZE)
+        frameBuffer.withBind {
+            blender.blend(
+                backTexture,
+                frontTexture,
+                BlenderInstruction(center = Vector2F(0f, 0.5f), adjustMode = AdjustMode.ORIGINAL),
+                flipX = true
+            )
+        }
+
+        BitmapUtils.assertBitmapEqual(frameBuffer.save(), "test_results/blender/test_7_result.png")
+    }
+
     @After
     fun cleanup() {
         blender.dispose()
