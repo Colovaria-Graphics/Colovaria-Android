@@ -16,6 +16,8 @@
 ```kotlin
 // For image engine:
 implementation "io.github.colovaria-graphics:image_engine:+"
+implementation "io.github.colovaria-graphics:graphics:+"
+implementation "io.github.colovaria-graphics:geometry:+"
 ```
 
 Latest version - [![][image_engine_badge img]][image_engine_badge]
