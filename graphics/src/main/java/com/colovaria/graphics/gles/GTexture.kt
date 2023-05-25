@@ -93,9 +93,8 @@ class GTexture : GHandle, GUniform, GBindableHandle {
         bind()
     }
 
-    override fun dispose() {
+    override fun actualDispose() {
         GLES.glDeleteTexture(handle)
-        disposed = true
     }
 
     private fun commonInit() = withBind {

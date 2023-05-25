@@ -21,9 +21,8 @@ class GSoftware : GObject {
         program.bind()
     }
 
-    override fun dispose() {
+    override fun actualDispose() {
         shaders.forEach { it.dispose() }
         program.dispose()
-        disposed = true
     }
 }

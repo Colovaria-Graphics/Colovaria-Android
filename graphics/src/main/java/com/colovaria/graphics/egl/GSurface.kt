@@ -28,9 +28,8 @@ class GSurface private constructor(
     val size: Size
     get() = Size(width, height)
 
-    override fun dispose() {
+    override fun actualDispose() {
         assert(EGL.eglDestroySurface(display.eglDisplay, eglSurface))
-        disposed = true
     }
 
     companion object {

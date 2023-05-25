@@ -11,8 +11,7 @@ class GVertexArray : GHandle(GLES.glGenVertexArray()), GBindableHandle {
         }
     }
 
-    override fun dispose() {
+    override fun actualDispose() {
         GLES.glDeleteVertexArrays(intArrayOf(handle), 0)
-        disposed = true
     }
 }

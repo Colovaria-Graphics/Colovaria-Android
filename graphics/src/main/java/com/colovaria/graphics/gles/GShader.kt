@@ -14,9 +14,8 @@ class GShader : GHandle {
         attachCodeToShader(context.assets.open(filename).bufferedReader().use { it.readText() })
     }
 
-    override fun dispose() {
+    override fun actualDispose() {
         GLES.glDeleteShader(handle)
-        disposed = true
     }
 
     private fun attachCodeToShader(code: String) {

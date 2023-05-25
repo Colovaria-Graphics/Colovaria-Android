@@ -2,9 +2,16 @@ package com.colovaria.graphics.base
 
 abstract class GObject {
     @Volatile
-    protected var disposed = false
+    private var disposed = false
 
-    abstract fun dispose()
+    protected abstract fun actualDispose()
+
+    fun isDispose() = disposed
+
+    fun dispose() {
+        actualDispose()
+        disposed = true
+    }
 
     fun finalize() {
         assert(disposed) { toString() }

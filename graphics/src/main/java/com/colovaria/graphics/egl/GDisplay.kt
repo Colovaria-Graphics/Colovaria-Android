@@ -9,9 +9,8 @@ class GDisplay private constructor(
     val eglDisplay: EGLDisplay,
     val eglConfig: EGLConfig
 ) : GObject() {
-    override fun dispose() {
+    override fun actualDispose() {
         assert(EGL.eglTerminate(eglDisplay))
-        disposed = true
     }
 
     object Utils {

@@ -62,10 +62,9 @@ class GDynamicDrawer private constructor(
         vaoBindReference.unbind()
     }
 
-    override fun dispose() {
+    override fun actualDispose() {
         vertexBufferEntries.forEach { it.vertexBuffer.dispose() }
         vertexArray.dispose()
-        disposed = true
     }
 
     private data class VertexBufferEntry(

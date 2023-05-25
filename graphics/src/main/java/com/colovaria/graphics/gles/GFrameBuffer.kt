@@ -86,10 +86,9 @@ class GFrameBuffer() : GHandle(GLES.glGenFramebuffer()), GBindableHandle {
         }
     }
 
-    override fun dispose() {
+    override fun actualDispose() {
         GLES.glDeleteFramebuffer(handle)
         texture?.dispose()
-        disposed = true
     }
 
     companion object {

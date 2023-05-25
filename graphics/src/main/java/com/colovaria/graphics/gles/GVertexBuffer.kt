@@ -39,9 +39,8 @@ class GVertexBuffer : GHandle, GBindableHandle {
         }
     }
 
-    override fun dispose() {
+    override fun actualDispose() {
         GLES.glDeleteBuffer(handle)
-        disposed = true
     }
 
     companion object {

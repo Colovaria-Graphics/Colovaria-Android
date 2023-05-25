@@ -38,9 +38,8 @@ class GContext private constructor(
         }
     }
 
-    override fun dispose() {
+    override fun actualDispose() {
         assert(EGL.eglDestroyContext(display.eglDisplay, eglContext))
-        disposed = true
     }
 
     companion object {

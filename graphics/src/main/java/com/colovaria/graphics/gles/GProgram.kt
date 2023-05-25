@@ -13,9 +13,8 @@ class GProgram : GHandle {
         GLES.glUseProgram(handle)
     }
 
-    override fun dispose() {
+    override fun actualDispose() {
         GLES.glDeleteProgram(handle)
-        disposed = true
     }
 
     private fun attachShadersToProgram(shaders: List<GShader>) {
