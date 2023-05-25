@@ -42,7 +42,6 @@ class FrameCompositor(
     private val textMeasurer = TextMeasurer(fontProvider)
 
     private val blender = Blender(context, size)
-    private val groupDrawer = GroupDrawer()
 
     private val textureDrawers = CompositeTextureDrawer().apply {
         // Add defaults drawers:
@@ -50,6 +49,7 @@ class FrameCompositor(
         attachDrawer(Gradient2DDrawer(context, size))
         attachDrawer(ShapeDrawer(size))
         attachDrawer(TextDrawer(textMeasurer, fontProvider, size))
+        attachDrawer(GroupDrawer())
     }
     private val textureProcessors = CompositeTextureProcessor(size).apply {
         // Add defaults drawers:
@@ -63,11 +63,9 @@ class FrameCompositor(
     fun render(frame: Frame, renderToSurface: Boolean = true) {
         textureDrawers.preFrameDraw()
         textureProcessors.preFrameDraw()
-        groupDrawer.preFrameDraw()
 
         renderInternal(frame, renderToSurface)
 
-        groupDrawer.postFrameDraw()
         textureProcessors.postFrameDraw()
         textureDrawers.postFrameDraw()
     }
@@ -76,7 +74,6 @@ class FrameCompositor(
         blender.dispose()
         textureDrawers.dispose()
         textureProcessors.dispose()
-        groupDrawer.dispose()
         frameBufferPool.dispose()
     }
 
@@ -120,7 +117,6 @@ class FrameCompositor(
         lastLayerTexture: GTexture
     ) : GTexture = when (layer.texturing) {
         is DrawerInstruction -> textureDrawers.draw(layer.texturing, layer.blending)
-        is GroupInstruction -> groupDrawer.drawInternal(layer.texturing, layer.blending)
         is ProcessorInstruction -> textureProcessors.process(layer.texturing, lastLayerTexture)
         else -> error("Unknown layer instruction ${layer.texturing}")
     }
